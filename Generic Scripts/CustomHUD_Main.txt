@@ -1,0 +1,76 @@
+﻿-- Register the behaviour
+behaviour("CustomHUD_Main")
+
+function CustomHUD_Main:Start()
+	-- Run when behaviour is created
+	GameEvents.onActorDied.AddListener(self,"onActorDied")
+	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+	
+	self.dataContainer = self.gameObject.GetComponent(DataContainer)
+
+	--Disable default HUD
+	local healthHUD = self.gameObject.Find("Health Image")
+	if healthHUD then
+		self.defaultHUD = healthHUD.transform.parent.gameObject
+		self.defaultHUD.gameObject.SetActive(false)
+	end
+	
+	self.targets.Canvas.enabled = false
+
+	if self.targets.WeaponHUD then
+		self.script.AddValueMonitor("monitorCurrentWeapon", "onChangeWeapon")
+	end
+	
+	if GameManager.buildNumber < 25 then
+		print("<color=red>[Custom HUD]You are using build number: " .. GameManager.buildNumber  .. " please update to the latest game version!</color>")
+		print("<color=red>[Custom HUD]Using an older version below EA25 may cause issues</color>")
+	end
+
+	local majorVersion = self.dataContainer.GetInt("majorVersion")
+	local minorVersion = self.dataContainer.GetInt("minorVersion")
+	local patchVersion = self.dataContainer.GetInt("patchVersion")
+	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
+	
+	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.2.1</color>")
+
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
+end
+
+function CustomHUD_Main:Update()
+	if Input.GetKeyDown(KeyCode.U) then
+		self.defaultHUD.gameObject.SetActive(true)
+	end
+end
+
+function CustomHUD_Main:monitorCurrentWeapon()
+	return Player.actor.activeWeapon
+end
+
+function CustomHUD_Main:onChangeWeapon()
+	if Player.actor.activeWeapon == nil then
+		self.targets.WeaponHUD.SetActive(false)
+		return
+	end
+	self.targets.WeaponHUD.SetActive(true)
+end
+
+function CustomHUD_Main:monitorHUDVisibility()
+	return GameManager.hudPlayerEnabled
+end
+
+function CustomHUD_Main:onHUDVisibilityChange()
+	self.targets.Canvas.enabled = not Player.actor.isDead and GameManager.hudPlayerEnabled
+end
+
+function CustomHUD_Main:onActorSpawn(actor)
+	if actor.isPlayer then
+		self.targets.Canvas.enabled = GameManager.hudPlayerEnabled
+	end
+end
+
+function CustomHUD_Main:onActorDied(actor,source,isSilent)
+	if actor.isPlayer then
+		self.targets.Canvas.enabled = false
+	end
+end
