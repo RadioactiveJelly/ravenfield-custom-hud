@@ -10,7 +10,7 @@ function CustomHUD_Weapon:Start()
 	self.script.AddValueMonitor("monitorHeat", "onHeatChange")
 	self.script.AddValueMonitor("monitorFireMode", "onFireModeChange")
 
-	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.1.0 </color>")
+	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.1.1 </color>")
 end
 
 function CustomHUD_Weapon:onActorSpawn(actor)
@@ -50,8 +50,8 @@ function CustomHUD_Weapon:onChangeWeapon()
 		self.targets.heatText.gameObject.SetActive(false)
 	end
 
-	self:onAmmoChange()
-	self:onSpareAmmoChange()
+	self:onAmmoChange(Player.actor.activeWeapon.activeSubWeapon.ammo)
+	self:onSpareAmmoChange(Player.actor.activeWeapon.activeSubWeapon.spareAmmo)
 
 	self.targets.weaponName.text = name
 end
@@ -125,6 +125,7 @@ function CustomHUD_Weapon:onSpareAmmoChange(spareAmmo)
 		self.targets.spareAmmoText.gameObject.SetActive(false)
 	elseif Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo == -2 then
 		self.targets.spareAmmoText.gameObject.SetActive(true)
+		self.targets.spareAmmoText.color = Color.white
 		self.targets.spareAmmoText.text = "∞"
 	end
 end
