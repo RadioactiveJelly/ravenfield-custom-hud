@@ -26,21 +26,13 @@ function CustomHUD_Main:Start()
 		print("<color=red>[Custom HUD]Using an older version below EA25 may cause issues</color>")
 	end
 
-	local majorVersion = self.dataContainer.GetInt("majorVersion")
-	local minorVersion = self.dataContainer.GetInt("minorVersion")
-	local patchVersion = self.dataContainer.GetInt("patchVersion")
-	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
+	local hudVersion = self.dataContainer.GetString("hudVersion")
+	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. hudVersion .. "</color>")
 	
 	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
-	print("<color=lightblue>[Custom HUD]Initialized Main script v1.2.1</color>")
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.2.2</color>")
 
 	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
-end
-
-function CustomHUD_Main:Update()
-	if Input.GetKeyDown(KeyCode.U) then
-		self.defaultHUD.gameObject.SetActive(true)
-	end
 end
 
 function CustomHUD_Main:monitorCurrentWeapon()
