@@ -1,7 +1,7 @@
 #
 Ravenfield - Custom HUD
 ------------------------------------------
-Scripts for creating custom HUDs for Ravenfield! A template (the Black Ops:Cold War HUD) is provided as an example. Below is short documentation for each script.
+Scripts for creating custom HUDs for Ravenfield! A template (the Black Ops:Cold War HUD) is provided as an example. Below is short documentation for each script. Please note that these scripts are in active development and are thus likely to be updated as time goes on.
 
 #### CustomHUD_Main
 This script handles hiding the default HUD. This script also handles hiding the weapon HUD if the player has no weapon and auto hiding all the UI elements when dead or when
