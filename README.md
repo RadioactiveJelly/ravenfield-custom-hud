@@ -1,7 +1,7 @@
 #
 Ravenfield - Custom HUD
 ------------------------------------------
-Scripts for creating custom HUDs for Ravenfield! A template (the Black Ops:Cold War HUD) is provided as an example. Below is short documentation for each script. Please note that these scripts are in active development and are thus likely to be updated as time goes on.
+Scripts for creating custom HUDs for Ravenfield! The Black Ops: Cold War style HUD is included here as an example. Below is short documentation for each script. Please note that these scripts are in active development and are thus likely to be updated as time goes on.
 
 When making UI elements, follow the naming conventions of the targets listed below. Format is "targetName(Type)". If you don't use the same name listed below, you'll have to edit the script. Bold targets are **required**. Everything else is optional.
 
