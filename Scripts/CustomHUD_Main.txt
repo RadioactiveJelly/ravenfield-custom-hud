@@ -30,7 +30,18 @@ function CustomHUD_Main:Start()
 	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. hudVersion .. "</color>")
 	
 	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
-	print("<color=lightblue>[Custom HUD]Initialized Main script v1.2.2</color>")
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.3.0</color>")
+
+	self.healthBarVisibility = self.script.mutator.GetConfigurationBool("healthBarVisibility")
+	self.weaponHUDVisibility = self.script.mutator.GetConfigurationBool("weaponHUDVisibility")
+	self.playerNameVisibility = self.script.mutator.GetConfigurationBool("playerNameVisibility")
+	self.vehicleHUDVisibility = self.script.mutator.GetConfigurationBool("vehicleHUDVisibility")
+	self.squadTextVisibility = self.script.mutator.GetConfigurationBool("squadTextVisibility")
+
+	self.targets.HealthBar.SetActive(self.healthBarVisibility)
+	self.targets.PlayerName.SetActive(self.playerNameVisibility and GameManager.isLegitimate)
+	self.targets.VehicleHUD.SetActive(self.vehicleHUDVisibility)
+	self.targets.SquadHUD.SetActive(self.squadTextVisibility)
 
 	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
 end
@@ -44,7 +55,7 @@ function CustomHUD_Main:onChangeWeapon()
 		self.targets.WeaponHUD.SetActive(false)
 		return
 	end
-	self.targets.WeaponHUD.SetActive(true)
+	self.targets.WeaponHUD.SetActive(self.weaponHUDVisibility)
 end
 
 function CustomHUD_Main:monitorHUDVisibility()
