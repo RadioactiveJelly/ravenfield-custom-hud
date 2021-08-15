@@ -10,7 +10,12 @@ This script handles hiding the default HUD. This script also handles hiding the 
 disabling the HUD via the "End" key.
 ###### Targets:
   - **canvas(Canvas)**
-  - WeaponHUD(Animator)  
+  - WeaponHUD(GameObject)
+  - HealthBar(GameObject)
+  - VehicleHUD(GameObject)
+  - PlayerName(GameObject)
+  - SquadHUD(GameObject)
+  - HealthNumber(GameObject)
 
 The game object holding this script also needs a data container with two strings using these IDs:
   - hudName
@@ -47,6 +52,12 @@ This script handles updating the HUD elements for the current weapon's ammo, spa
   - **heatText(Text)**
   - **weaponName(Text)**
   - **fireMode(Text)**
+  - **SightMode(Text)**
+
+#### CustomHUD_NumericalHealth
+This script displays the current HP as a number. Progressively becomes redder as HP goes lower. Can be disabled in the script.
+##### Targets:
+ - **HealthText(Text)**
 
 
 If you're having trouble with setting up, you can take a look at how the BO:CW HUD is set up.
