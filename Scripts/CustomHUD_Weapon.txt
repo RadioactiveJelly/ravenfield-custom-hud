@@ -1,6 +1,10 @@
 ﻿-- Register the behaviour
 behaviour("CustomHUD_Weapon")
 
+function CustomHUD_Weapon:Awake()
+	self.sightText = GameObject.Find("Sight Text").GetComponent(Text)
+end
+
 function CustomHUD_Weapon:Start()
 	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
 
@@ -10,7 +14,9 @@ function CustomHUD_Weapon:Start()
 	self.script.AddValueMonitor("monitorHeat", "onHeatChange")
 	self.script.AddValueMonitor("monitorFireMode", "onFireModeChange")
 
-	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.1.1 </color>")
+	self.script.AddValueMonitor("monitorSightModeText", "onSightModeChange")
+
+	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.2.0 </color>")
 end
 
 function CustomHUD_Weapon:onActorSpawn(actor)
@@ -90,6 +96,9 @@ function CustomHUD_Weapon:onAmmoChange(ammo)
 	
 	if ammo >= 0 then
 		self.targets.ammoText.gameObject.SetActive(true)
+		if ammo > 999 then
+			ammo = 999
+		end
 		self.targets.ammoText.text = ammo
 		if ammo/Player.actor.activeWeapon.activeSubWeapon.maxAmmo < 0.4 then
 			self.targets.ammoText.color = Color.red
@@ -147,5 +156,12 @@ function CustomHUD_Weapon:onFireModeChange(isAuto)
 	else
 		self.targets.fireMode.text = "Single Fire"
 	end
+end
 
+function CustomHUD_Weapon:monitorSightModeText()
+	return self.sightText.text
+end
+
+function CustomHUD_Weapon:onSightModeChange()
+	self.targets.SightMode.text = self.sightText.text
 end

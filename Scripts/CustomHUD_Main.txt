@@ -19,8 +19,33 @@ function CustomHUD_Main:Start()
 
 	if self.targets.WeaponHUD then
 		self.script.AddValueMonitor("monitorCurrentWeapon", "onChangeWeapon")
+		self.weaponHUDVisibility = self.script.mutator.GetConfigurationBool("weaponHUDVisibility")
 	end
 	
+	if self.targets.HealthBar then
+		self.healthBarVisibility = self.script.mutator.GetConfigurationBool("healthBarVisibility")
+		self.targets.HealthBar.SetActive(self.healthBarVisibility)
+	end
+	if self.targets.PlayerName then
+		self.playerNameVisibility = self.script.mutator.GetConfigurationBool("playerNameVisibility")
+		self.targets.PlayerName.SetActive(self.playerNameVisibility and GameManager.isLegitimate)
+	end
+
+	if self.targets.VehicleHUD then
+		self.vehicleHUDVisibility = self.script.mutator.GetConfigurationBool("vehicleHUDVisibility")
+		self.targets.VehicleHUD.SetActive(self.vehicleHUDVisibility)
+	end
+	
+	if self.targets.SquadHUD then
+		self.squadTextVisibility = self.script.mutator.GetConfigurationBool("squadTextVisibility")
+		self.targets.SquadHUD.SetActive(self.squadTextVisibility)
+	end
+	
+	if self.targets.HealthNumber then
+		self.healthNumberVisibility = self.script.mutator.GetConfigurationBool("healthNumberVisibility")
+		self.targets.HealthNumber.SetActive(self.healthNumberVisibility)
+	end
+
 	if GameManager.buildNumber < 25 then
 		print("<color=red>[Custom HUD]You are using build number: " .. GameManager.buildNumber  .. " please update to the latest game version!</color>")
 		print("<color=red>[Custom HUD]Using an older version below EA25 may cause issues</color>")
@@ -30,19 +55,10 @@ function CustomHUD_Main:Start()
 	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. hudVersion .. "</color>")
 	
 	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
-	print("<color=lightblue>[Custom HUD]Initialized Main script v1.3.0</color>")
-
-	self.healthBarVisibility = self.script.mutator.GetConfigurationBool("healthBarVisibility")
-	self.weaponHUDVisibility = self.script.mutator.GetConfigurationBool("weaponHUDVisibility")
-	self.playerNameVisibility = self.script.mutator.GetConfigurationBool("playerNameVisibility")
-	self.vehicleHUDVisibility = self.script.mutator.GetConfigurationBool("vehicleHUDVisibility")
-	self.squadTextVisibility = self.script.mutator.GetConfigurationBool("squadTextVisibility")
-
-	self.targets.HealthBar.SetActive(self.healthBarVisibility)
-	self.targets.PlayerName.SetActive(self.playerNameVisibility and GameManager.isLegitimate)
-	self.targets.VehicleHUD.SetActive(self.vehicleHUDVisibility)
-	self.targets.SquadHUD.SetActive(self.squadTextVisibility)
-
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.0</color>")
+	
+	
+	
 	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
 end
 
@@ -51,6 +67,9 @@ function CustomHUD_Main:monitorCurrentWeapon()
 end
 
 function CustomHUD_Main:onChangeWeapon()
+	if self.targets.WeaponHUD == nil then
+		return
+	end
 	if Player.actor.activeWeapon == nil then
 		self.targets.WeaponHUD.SetActive(false)
 		return
