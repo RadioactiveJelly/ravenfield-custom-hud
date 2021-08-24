@@ -28,7 +28,7 @@ function CustomHUD_Main:Start()
 	end
 	if self.targets.PlayerName then
 		self.playerNameVisibility = self.script.mutator.GetConfigurationBool("playerNameVisibility")
-		self.targets.PlayerName.SetActive(self.playerNameVisibility and GameManager.isLegitimate)
+		self.targets.PlayerName.SetActive(self.playerNameVisibility or not GameManager.isLegitimate or Player.actor.name == "Unknown Player")
 	end
 
 	if self.targets.VehicleHUD then
@@ -55,7 +55,7 @@ function CustomHUD_Main:Start()
 	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. hudVersion .. "</color>")
 	
 	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
-	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.0</color>")
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.1</color>")
 	
 	
 	

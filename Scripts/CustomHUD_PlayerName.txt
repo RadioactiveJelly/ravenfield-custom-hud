@@ -4,17 +4,25 @@ behaviour("CustomHUD_PlayerName")
 function CustomHUD_PlayerName:Start()
 	-- Run when behaviour is created
 	local configString = self.script.mutator.GetConfigurationString("displayName")
-	if configString == "" then
-		self.playerName = Player.actor.name
-	elseif not GameManager.isLegitimate then
-		self.playerName = "Pirate"
-	elseif not GameManager.isLegitimate and not configString == "" then
-		self.playerName = "Nice Try"
-	else
-		self.playerName = configString
+	local isPirate = (Player.actor.name == "Unknown Player" or not GameManager.isLegitimate)
+
+	if not isPirate then
+		if configString == "" then
+			self.playerName = Player.actor.name
+		else
+			self.playerName = configString
+		end
+	elseif isPirate then
+		print("<color=red>PIRATE</color>")
+		if configString == "" then
+			self.playerName = "Pirate"
+		else
+			self.playerName = "Nice Try"
+		end
 	end
+	
 	self.targets.playerNameText.text = self.playerName
 
-	print("<color=lightblue>[Custom HUD]Initialized Player Name Module v1.1.0 </color>")
+	print("<color=lightblue>[Custom HUD]Initialized Player Name Module v1.1.2 </color>")
 end
 
