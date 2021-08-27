@@ -94,20 +94,27 @@ function CustomHUD_Weapon:onAmmoChange(ammo)
 		return
 	end
 	
-	if ammo >= 0 then
-		self.targets.ammoText.gameObject.SetActive(true)
-		if ammo > 999 then
-			ammo = 999
-		end
-		self.targets.ammoText.text = ammo
-		if ammo/Player.actor.activeWeapon.activeSubWeapon.maxAmmo < 0.4 then
-			self.targets.ammoText.color = Color.red
+	if self.targets.ammoText then
+		if ammo >= 0 then
+			self.targets.ammoText.gameObject.SetActive(true)
+			if ammo > 999 then
+				ammo = 999
+			end
+			self.targets.ammoText.text = ammo
+			if ammo/Player.actor.activeWeapon.activeSubWeapon.maxAmmo < 0.4 then
+				self.targets.ammoText.color = Color.red
+			else
+				self.targets.ammoText.color = Color.white
+			end
 		else
-			self.targets.ammoText.color = Color.white
-		end
-	else
-		self.targets.ammoText.gameObject.SetActive(false)
-	end	
+			self.targets.ammoText.gameObject.SetActive(false)
+		end	
+	end
+	
+	if self.targets.AmmoBar then
+		self.targets.AmmoBar.fillAmount = ammo/Player.actor.activeWeapon.activeSubWeapon.maxAmmo
+	end
+
 end
 
 function CustomHUD_Weapon:monitorSpareAmmo()
