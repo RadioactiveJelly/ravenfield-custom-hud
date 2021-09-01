@@ -1,0 +1,12 @@
+﻿-- Register the behaviour
+behaviour("CustomHUD_EHSBuffIcons")
+
+function CustomHUD_EHSBuffIcons:Start()
+	-- Run when behaviour is created
+	print("Hello World")
+end
+
+function CustomHUD_EHSBuffIcons:Update()
+	-- Run every frame
+	
+end
