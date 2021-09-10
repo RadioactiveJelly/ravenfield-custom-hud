@@ -16,7 +16,7 @@ function CustomHUD_Weapon:Start()
 
 	self.script.AddValueMonitor("monitorSightModeText", "onSightModeChange")
 
-	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.2.0 </color>")
+	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.2.1 </color>")
 end
 
 function CustomHUD_Weapon:onActorSpawn(actor)
@@ -129,10 +129,10 @@ function CustomHUD_Weapon:onSpareAmmoChange(spareAmmo)
 		return
 	end
 
-	if Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo > 0 then
+	if Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo >= 0 then
 		self.targets.spareAmmoText.gameObject.SetActive(true)
 		self.targets.spareAmmoText.text = spareAmmo
-		if spareAmmo/Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo <= 0.3 then
+		if spareAmmo/Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo <= 0.3 or spareAmmo == 0 then
 			self.targets.spareAmmoText.color = Color.red
 		else
 			self.targets.spareAmmoText.color = Color.white
