@@ -7,13 +7,8 @@ function CustomHUD_Main:Start()
 	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
 	
 	self.dataContainer = self.gameObject.GetComponent(DataContainer)
-
-	--Disable default HUD
-	local healthHUD = self.gameObject.Find("Health Image")
-	if healthHUD then
-		self.defaultHUD = healthHUD.transform.parent.gameObject
-		self.defaultHUD.gameObject.SetActive(false)
-	end
+	
+	self:DisableDefaultHUD()
 	
 	self.targets.Canvas.enabled = false
 
@@ -55,7 +50,7 @@ function CustomHUD_Main:Start()
 	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. hudVersion .. "</color>")
 	
 	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
-	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.1</color>")
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.2</color>")
 	
 	
 	
@@ -95,4 +90,17 @@ function CustomHUD_Main:onActorDied(actor,source,isSilent)
 	if actor.isPlayer then
 		self.targets.Canvas.enabled = false
 	end
+end
+
+function CustomHUD_Main:DisableDefaultHUD()
+	GameObject.Find("Ingame UI Container(Clone)").Find("Ingame UI/Panel").gameObject.GetComponent(Image).color = Color(0,0,0,0)
+	GameObject.Find("Current Ammo Text").gameObject.SetActive(false)
+	GameObject.Find("Spare Ammo Text").gameObject.SetActive(false)
+	GameObject.Find("Vehicle Health Background").gameObject.SetActive(false)
+	GameObject.Find("Resupply Health").gameObject.SetActive(false)
+	GameObject.Find("Resupply Ammo").gameObject.SetActive(false)
+	GameObject.Find("Squad Text").gameObject.GetComponent(Text).color = Color(0,0,0,0)
+	GameObject.Find("Sight Text").gameObject.SetActive(false)
+	GameObject.Find("Weapon Image").gameObject.SetActive(false)
+	GameObject.Find("Health Text").gameObject.transform.parent.gameObject.SetActive(false)
 end

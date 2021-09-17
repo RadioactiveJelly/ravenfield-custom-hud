@@ -6,7 +6,6 @@ function CustomHUD_Squad:Awake()
 end
 
 function CustomHUD_Squad:Start()
-	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
 	self.script.AddValueMonitor("monitorSquadText", "updateSquadText")
 	self:updateSquadText()
 
@@ -19,10 +18,4 @@ end
 
 function CustomHUD_Squad:updateSquadText()
 	self.targets.squadText.text = self.squadText.text
-end
-
-function CustomHUD_Squad:onActorSpawn(actor)
-	if actor.isPlayer then
-		--self:updateSquadText()
-	end
 end
