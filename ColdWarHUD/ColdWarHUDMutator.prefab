@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 55e35bf695d116c43864f36291536077, type: 3}
+  source: {fileID: 2213920135882650261, guid: 816f1b42ef502b64eb0e86728e330f5b, type: 3}
   behaviour: 
   targets:
   - name: playerNameText
@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 1d7e45af53e0c894080299e524581cbf, type: 3}
+  source: {fileID: 2213920135882650261, guid: 7b19058f5be2ba744847d5554e66248e, type: 3}
   behaviour: 
   targets:
   - name: vehicleName
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 38fe8c9a6d1e8a1469621209b0ec0fa2, type: 3}
+  source: {fileID: 2213920135882650261, guid: f73ecc77d3f6a5e428169ecc0d3f630a, type: 3}
   behaviour: 
   targets:
   - name: HealthText
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 7a041d2f0c7ad1247963bf922f1d106c, type: 3}
+  source: {fileID: 2213920135882650261, guid: 8755e8e008123294988193768d9cea65, type: 3}
   behaviour: 
   targets:
   - name: Canvas
@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 59db3956d36d78a428a36bc4cfd45d16, type: 3}
+  source: {fileID: 2213920135882650261, guid: a5f44731fefc1224f84c462f89543045, type: 3}
   behaviour: 
   targets:
   - name: healthBar
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: bfb80343ec68898428608e9458dd7da2, type: 3}
+  source: {fileID: 2213920135882650261, guid: 65bf9953787dcc540b1c3b6c1faf7610, type: 3}
   behaviour: 
   targets:
   - name: squadText
