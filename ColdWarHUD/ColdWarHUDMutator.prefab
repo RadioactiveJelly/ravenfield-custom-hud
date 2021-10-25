@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 7384f5a1c1f45ee40b0b14bc2bb62a5d, type: 3}
+  source: {fileID: 2213920135882650261, guid: 7831e1591461f7a4d8b87d554b3a6e04, type: 3}
   behaviour: 
   targets:
   - name: heatText
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: c7d8b2cbb7dab4c429a5e3033f6128d4, type: 3}
+  source: {fileID: 2213920135882650261, guid: 2d0f81bcaa0234e4e97d39d088ad88a1, type: 3}
   behaviour: 
   targets:
   - name: ammoText
