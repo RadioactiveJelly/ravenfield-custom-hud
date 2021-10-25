@@ -6,25 +6,13 @@ function CustomHUD_Weapon:Awake()
 end
 
 function CustomHUD_Weapon:Start()
-	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
-
 	self.script.AddValueMonitor("monitorCurrentWeapon", "onChangeWeapon")
-	self.script.AddValueMonitor("monitorAmmo", "onAmmoChange")
-	self.script.AddValueMonitor("monitorSpareAmmo", "onSpareAmmoChange")
 	self.script.AddValueMonitor("monitorHeat", "onHeatChange")
 	self.script.AddValueMonitor("monitorFireMode", "onFireModeChange")
 
 	self.script.AddValueMonitor("monitorSightModeText", "onSightModeChange")
 
 	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.2.1 </color>")
-end
-
-function CustomHUD_Weapon:onActorSpawn(actor)
-	if actor.isPlayer then
-		--self:onChangeWeapon()
-		--self:onAmmoChange()
-		--self:onSpareAmmoChange()
-	end
 end
 
 function CustomHUD_Weapon:monitorCurrentWeapon()
@@ -56,8 +44,8 @@ function CustomHUD_Weapon:onChangeWeapon()
 		self.targets.heatText.gameObject.SetActive(false)
 	end
 
-	self:onAmmoChange(Player.actor.activeWeapon.activeSubWeapon.ammo)
-	self:onSpareAmmoChange(Player.actor.activeWeapon.activeSubWeapon.spareAmmo)
+	self.targets.AmmoDisplay.self:onAmmoChange(Player.actor.activeWeapon.activeSubWeapon.ammo)
+	self.targets.AmmoDisplay.self:onSpareAmmoChange(Player.actor.activeWeapon.activeSubWeapon.spareAmmo)
 
 	self.targets.weaponName.text = name
 end
@@ -79,70 +67,6 @@ function CustomHUD_Weapon:onHeatChange()
 		heatPercentage = Mathf.Round(heatPercentage)
 		self.targets.heatText.text = "Heat: " .. heatPercentage .. "%"
 		self.targets.heatText.color = Color(1, color, color, 1)
-	end
-end
-
-function CustomHUD_Weapon:monitorAmmo()
-	if Player.actor.activeWeapon == nil then
-		return nil
-	end
-	return Player.actor.activeWeapon.activeSubWeapon.ammo
-end
-
-function CustomHUD_Weapon:onAmmoChange(ammo)
-	if ammo == nil then
-		return
-	end
-	
-	if self.targets.ammoText then
-		if ammo >= 0 then
-			self.targets.ammoText.gameObject.SetActive(true)
-			if ammo > 999 then
-				ammo = 999
-			end
-			self.targets.ammoText.text = ammo
-			if ammo/Player.actor.activeWeapon.activeSubWeapon.maxAmmo < 0.4 then
-				self.targets.ammoText.color = Color.red
-			else
-				self.targets.ammoText.color = Color.white
-			end
-		else
-			self.targets.ammoText.gameObject.SetActive(false)
-		end	
-	end
-	
-	if self.targets.AmmoBar then
-		self.targets.AmmoBar.fillAmount = ammo/Player.actor.activeWeapon.activeSubWeapon.maxAmmo
-	end
-
-end
-
-function CustomHUD_Weapon:monitorSpareAmmo()
-	if Player.actor.activeWeapon == nil then
-		return nil
-	end
-	return Player.actor.activeWeapon.activeSubWeapon.spareAmmo
-end
-
-function CustomHUD_Weapon:onSpareAmmoChange(spareAmmo)
-	if spareAmmo == nil then
-		return
-	end
-
-	if Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo >= 0 then
-		self.targets.spareAmmoText.gameObject.SetActive(true)
-		self.targets.spareAmmoText.text = spareAmmo
-		if spareAmmo/Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo <= 0.3 or spareAmmo == 0 then
-			self.targets.spareAmmoText.color = Color.red
-		else
-			self.targets.spareAmmoText.color = Color.white
-		end
-	elseif Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo == -1 then
-		self.targets.spareAmmoText.gameObject.SetActive(false)
-	elseif Player.actor.activeWeapon.activeSubWeapon.maxSpareAmmo == -2 then
-		self.targets.spareAmmoText.gameObject.SetActive(true)
-		self.targets.spareAmmoText.color = Color.white
-		self.targets.spareAmmoText.text = "∞"
 	end
 end
 
