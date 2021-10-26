@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 1d7e45af53e0c894080299e524581cbf, type: 3}
+  source: {fileID: 2213920135882650261, guid: 7b19058f5be2ba744847d5554e66248e, type: 3}
   behaviour: 
   targets:
   - name: vehicleName
@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: c7d8b2cbb7dab4c429a5e3033f6128d4, type: 3}
+  source: {fileID: 2213920135882650261, guid: 2d0f81bcaa0234e4e97d39d088ad88a1, type: 3}
   behaviour: 
   targets:
   - name: ammoText
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 59db3956d36d78a428a36bc4cfd45d16, type: 3}
+  source: {fileID: 2213920135882650261, guid: a5f44731fefc1224f84c462f89543045, type: 3}
   behaviour: 
   targets:
   - name: healthBar
@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: c1d730c02d6d9764793c043254b45c0b, type: 3}
+  source: {fileID: 2213920135882650261, guid: 8a80d9ff6b0d6e748946cc019d6a31fe, type: 3}
   behaviour: 
   targets:
   - name: Slot1GO
@@ -1288,7 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 15331e6b98a8df8409078cfe08aaa3e7, type: 3}
+  source: {fileID: 2213920135882650261, guid: f513764e546cf6340a8323b6b208c838, type: 3}
   behaviour: 
   targets:
   - name: stanceImage
@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 7384f5a1c1f45ee40b0b14bc2bb62a5d, type: 3}
+  source: {fileID: 2213920135882650261, guid: 7831e1591461f7a4d8b87d554b3a6e04, type: 3}
   behaviour: 
   targets:
   - name: heatText
@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 1d797dce2f84f224c878f5b3d02583b1, type: 3}
+  source: {fileID: 2213920135882650261, guid: 65bf9953787dcc540b1c3b6c1faf7610, type: 3}
   behaviour: 
   targets:
   - name: Compass
@@ -2663,7 +2663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 15331e6b98a8df8409078cfe08aaa3e7, type: 3}
+  source: {fileID: 2213920135882650261, guid: f513764e546cf6340a8323b6b208c838, type: 3}
   behaviour: 
   targets:
   - name: stanceImage
@@ -3665,7 +3665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: d965276a30f9e744f95c4ef676e59149, type: 3}
+  source: {fileID: 2213920135882650261, guid: 4113b781ff720bd48ac18b4c4893c4e1, type: 3}
   behaviour: 
   targets:
   - name: canvasGroup
@@ -4331,7 +4331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 7a041d2f0c7ad1247963bf922f1d106c, type: 3}
+  source: {fileID: 2213920135882650261, guid: 8755e8e008123294988193768d9cea65, type: 3}
   behaviour: 
   targets:
   - name: Canvas
@@ -4469,7 +4469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: bfb80343ec68898428608e9458dd7da2, type: 3}
+  source: {fileID: 2213920135882650261, guid: 65bf9953787dcc540b1c3b6c1faf7610, type: 3}
   behaviour: 
   targets:
   - name: squadText
