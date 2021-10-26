@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 8e232011aea991440826bc5aee7c4ddf, type: 2}
+  m_Material: {fileID: 2100000, guid: 012930d76260fff448ebcb9a90def707, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4900000, guid: 55e35bf695d116c43864f36291536077, type: 3}
+  source: {fileID: 2213920135882650261, guid: 816f1b42ef502b64eb0e86728e330f5b, type: 3}
   behaviour: 
   targets:
   - name: playerNameText
@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 2213920135882650261, guid: 65bf9953787dcc540b1c3b6c1faf7610, type: 3}
+  source: {fileID: 2213920135882650261, guid: 8297b596cf828f34e882d688a9f6d5b9, type: 3}
   behaviour: 
   targets:
   - name: Compass
@@ -4435,7 +4435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 8e232011aea991440826bc5aee7c4ddf, type: 2}
+  m_Material: {fileID: 2100000, guid: 012930d76260fff448ebcb9a90def707, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
