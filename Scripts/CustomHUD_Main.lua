@@ -52,9 +52,8 @@ function CustomHUD_Main:Start()
 	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
 	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.2</color>")
 	
-	
-	
 	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
+	
 end
 
 function CustomHUD_Main:monitorCurrentWeapon()
@@ -103,4 +102,5 @@ function CustomHUD_Main:DisableDefaultHUD()
 	GameObject.Find("Sight Text").gameObject.SetActive(false)
 	GameObject.Find("Weapon Image").gameObject.SetActive(false)
 	GameObject.Find("Health Text").gameObject.transform.parent.gameObject.SetActive(false)
+	
 end

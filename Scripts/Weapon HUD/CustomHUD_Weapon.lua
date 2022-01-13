@@ -26,15 +26,11 @@ function CustomHUD_Weapon:onChangeWeapon()
 	local name = ""
 	if Player.actor.activeWeapon.weaponEntry then
 		name = Player.actor.activeWeapon.weaponEntry.name
-		if string.find(Player.actor.activeWeapon.weaponEntry.name, "EXTAS") then
-			name = string.gsub(name, "EXTAS%s+-%s", "")
-		end
+		name = self:CleanString(name,"EXTAS", "EXTAS%s-%s")
+		name = self:CleanString(name,"RWP2_", "RWP2_")
 	else
 		name = Player.actor.activeWeapon.gameObject.name
-		print(name)
-		if string.find(Player.actor.activeWeapon.gameObject.name, "(Clone)") then
-			name = string.gsub(name, '%(Clone%)', "")
-		end
+		name = self:CleanString(name,"(Clone)", "%(Clone%)")
 	end
 	
 	if Player.actor.activeWeapon.applyHeat then
@@ -50,6 +46,12 @@ function CustomHUD_Weapon:onChangeWeapon()
 	self.targets.weaponName.text = name
 end
 
+function CustomHUD_Weapon:CleanString(str, target, format)
+	if string.find(str, target) then
+		str = string.gsub(str, format, "")
+	end
+	return str
+end
 function CustomHUD_Weapon:monitorHeat()
 	if Player.actor.activeWeapon == nil then
 		return
