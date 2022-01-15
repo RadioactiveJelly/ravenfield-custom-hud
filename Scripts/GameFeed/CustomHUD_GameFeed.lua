@@ -58,6 +58,7 @@ function CustomHUD_GameFeed:Start()
 	end
 
 	self.messageQueue = {}
+	self.messagePool = {}
 
 	self.locked = false
 
@@ -69,12 +70,9 @@ end
 function CustomHUD_GameFeed:Update()
 
 	--[[if (Input.GetKeyDown(KeyCode.O)) then
-		local newMessage = self.gameObject.Instantiate(self.gameMessagePrefab).GetComponent(ScriptedBehaviour)
-		newMessage.self:InitVariables()
-		newMessage.gameObject.transform.parent = self.gameObject.transform
-		newMessage.gameObject.transform.localPosition = Vector3(322,0,0)
+		local newMessage = self:RequestMessageObject()
 
-		newMessage.self:InitAsCaptureMessage("We captured a point!", Color.grey)
+		newMessage.self:WriteCaptureMessage("We captured a point!", Color.grey)
 
 		self:PushMessage(newMessage)
 	end]]--
@@ -83,7 +81,8 @@ function CustomHUD_GameFeed:Update()
 		local topMessage = self.messageQueue[#self.messageQueue]
 		if topMessage.self.isDead then
 			table.remove(self.messageQueue,#self.messageQueue)
-			GameObject.Destroy(topMessage.gameObject)
+			--return to pool
+			table.insert(self.messagePool, 1, topMessage)
 		end
 	end
 end
@@ -118,10 +117,7 @@ function CustomHUD_GameFeed:onActorDied(actor, source, isSilent)
 	local sourceName = ""
 	local sourceWeapon = ""
 
-	local newMessage = self.gameObject.Instantiate(self.gameMessagePrefab).GetComponent(ScriptedBehaviour)
-	newMessage.self:InitVariables(self.weaponSpriteScale)
-	newMessage.gameObject.transform.parent = self.gameObject.transform
-	newMessage.gameObject.transform.localPosition = Vector3(322,0,0)
+	local newMessage = self:RequestMessageObject()
 
 	if actor.team == Team.Blue then
 		actorName = "<color=" .. self.blueTeamHexCode .. ">" .. actorName .. "</color>"
@@ -177,10 +173,7 @@ function CustomHUD_GameFeed:onCapturePointCaptured(capturePoint, newOwner)
 	if self.hasSpawnedOnce and not Player.actor.isDead then
 		local capturePointText = capturePoint.name
 
-		local newMessage = self.gameObject.Instantiate(self.gameMessagePrefab).GetComponent(ScriptedBehaviour)
-		newMessage.self:InitVariables(self.weaponSpriteScale)
-		newMessage.gameObject.transform.parent = self.gameObject.transform
-		newMessage.gameObject.transform.localPosition = Vector3(322,0,0)
+		local newMessage = self:RequestMessageObject()
 
 		if newOwner == Team.Blue then
 			local text = self.blueTeamText ..  " captured " .. capturePointText .. "!"
@@ -198,10 +191,7 @@ function CustomHUD_GameFeed:onCapturePointNeutralized(capturePoint, previousOwne
 	if self.hasSpawnedOnce and not Player.actor.isDead then
 		local capturePointText = capturePoint.name
 
-		local newMessage = self.gameObject.Instantiate(self.gameMessagePrefab).GetComponent(ScriptedBehaviour)
-		newMessage.self:InitVariables(self.weaponSpriteScale)
-		newMessage.gameObject.transform.parent = self.gameObject.transform
-		newMessage.gameObject.transform.localPosition = Vector3(322,0,0)
+		local newMessage = self:RequestMessageObject()
 
 		if previousOwner == Team.Blue then
 			local text = self.redTeamText ..  " neutralized " .. capturePointText .. "!"
@@ -218,4 +208,18 @@ function CustomHUD_GameFeed:onActorSpawn(actor)
 	if(actor == Player.actor) then
 		self.hasSpawnedOnce = true
 	end
+end
+
+function CustomHUD_GameFeed:RequestMessageObject()
+	local messageObject = nil
+	if #self.messagePool > 0 then
+		messageObject = self.messagePool[1]
+		table.remove(self.messagePool,1)
+	else
+		messageObject = self.gameObject.Instantiate(self.gameMessagePrefab).GetComponent(ScriptedBehaviour)
+	end
+	messageObject.self:InitVariables(self.weaponSpriteScale)
+	messageObject.gameObject.transform.parent = self.gameObject.transform
+	messageObject.gameObject.transform.localPosition = Vector3(322,0,0)
+	return messageObject
 end

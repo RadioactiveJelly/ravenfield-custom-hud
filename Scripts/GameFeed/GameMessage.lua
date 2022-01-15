@@ -25,6 +25,13 @@ function GameMessage:InitVariables(scale)
 	self.targetPos = Vector3(322,0,0)
 	self.weaponSpriteScale = scale
 	self.canShow = false
+
+	self.killerText.gameObject.SetActive(false)
+	self.weaponSprite.gameObject.SetActive(false)
+	self.killedText.gameObject.SetActive(false)
+
+	self.flagImage.gameObject.SetActive(false)
+	self.captureText.gameObject.SetActive(false)
 end
 
 function GameMessage:Update()
@@ -90,8 +97,6 @@ function GameMessage:ScaleToTextRect(delay)
 	return function()
 		coroutine.yield(WaitForSeconds(delay))
 
-		print(self.weaponSprite.gameObject.transform.localPosition)
-
 		local spritePos = Vector3(self.killerRect.gameObject.transform.localPosition.x + self.killerRect.rect.size.x, self.weaponSprite.gameObject.transform.localPosition.y, 0)
 		local killedTextPos = Vector3(spritePos.x + self.weaponRect.rect.size.x, self.killedText.gameObject.transform.localPosition.y, 0)
 
@@ -122,5 +127,4 @@ end
 
 function GameMessage:SetPosition(yPos)
 	self.targetPos = Vector3(322,yPos,0)
-	print(self.targetPos)
 end

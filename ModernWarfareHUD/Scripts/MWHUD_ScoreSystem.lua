@@ -3,11 +3,8 @@ behaviour("MWHUD_ScoreSystem")
 
 function MWHUD_ScoreSystem:Start()
 	-- Run when behaviour is created
-	GameEvents.onActorDied.AddListener(self,"onActorDied")
-	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
-	GameEvents.onCapturePointCaptured.AddListener(self,"onCapturePointCaptured")
-	GameEvents.onCapturePointNeutralized.AddListener(self,"onCapturePointNeutralized")
-	GameEvents.onMatchEnd.AddListener(self,"onMatchEnd")
+
+	self.systemEnabled = self.script.mutator.GetConfigurationBool("scoreSystemEnabled")
 
 	self.totalPoints = 0
 	self.streakPoints = 0
@@ -25,9 +22,24 @@ function MWHUD_ScoreSystem:Start()
 	self.hasSpawnedOnce = false
 	self.matchFinished = false
 	self.canvasGroup.alpha = 0
+	self.bonusText.text = ""
+	self.pointsText.text = ""
+
+	if self.systemEnabled then
+		GameEvents.onActorDied.AddListener(self,"onActorDied")
+		GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+		GameEvents.onCapturePointCaptured.AddListener(self,"onCapturePointCaptured")
+		GameEvents.onCapturePointNeutralized.AddListener(self,"onCapturePointNeutralized")
+		GameEvents.onMatchEnd.AddListener(self,"onMatchEnd")
+		print("<color=lime>[MW HUD]Initialized Score System v1.0.0</color>")
+	end
 end
 
 function MWHUD_ScoreSystem:Update()
+	if self.enasystemEnabledbled == false then
+		return
+	end
+
 	if self.isInStreak then
 		if self.streakLifetime > 0 then
 			self.streakLifetime = self.streakLifetime - Time.deltaTime
@@ -65,9 +77,9 @@ function MWHUD_ScoreSystem:Update()
 		self.pointsText.gameObject.transform.localScale = Vector3(self.scale, self.scale, 0)
 	end
 
-	if (Input.GetKeyDown(KeyCode.O)) then
-		self:Score(85,"On The Defense!\nLongshot!")
-	end
+	--[[if Input.GetKeyDown(KeyCode.O) then
+		self:Score(10,"Defense Kill!\nOffense Kill!")
+	end]]--
 end
 
 function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
@@ -81,7 +93,7 @@ function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
 		local bonus = 0
 
 
-		if ActorManager.ActorDistanceToPlayer(actor) >= 35 then
+		if ActorManager.ActorDistanceToPlayer(actor) >= 50 then
 			bonus = 25
 			message = "Longshot"
 		end
@@ -92,14 +104,14 @@ function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
 				if message == "" then
 					message = "Defensive Kill!"
 				else
-					message = "\nDefensive Kill!"
+					message = message .. "\nDefensive Kill!"
 				end
 			else
 				bonus = bonus + 25
 				if message == "" then
 					message = "Offenseive Kill!"
 				else
-					message = "\nOffense Kill!"
+					message = message .. "\nOffense Kill!"
 				end
 			end
 		else
