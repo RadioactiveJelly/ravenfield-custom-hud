@@ -31,6 +31,11 @@ function MWHUD_ScoreSystem:Start()
 		GameEvents.onCapturePointCaptured.AddListener(self,"onCapturePointCaptured")
 		GameEvents.onCapturePointNeutralized.AddListener(self,"onCapturePointNeutralized")
 		GameEvents.onMatchEnd.AddListener(self,"onMatchEnd")
+		--Disable Ingame Kill Indicators though that can be done in the games' settings lol
+		GameObject.Find("Kill Indicator (1)").gameObject.SetActive(false)
+		GameObject.Find("Kill Indicator (2)").gameObject.SetActive(false)
+		GameObject.Find("Kill Indicator").gameObject.SetActive(false)
+		GameObject.Find("Kill Indicator Parent Panel").gameObject.SetActive(false)
 		print("<color=lime>[MW HUD]Initialized Score System v1.0.0</color>")
 	end
 end
@@ -109,7 +114,7 @@ function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
 			else
 				bonus = bonus + 25
 				if message == "" then
-					message = "Offenseive Kill!"
+					message = "Offensive Kill!"
 				else
 					message = message .. "\nOffense Kill!"
 				end
