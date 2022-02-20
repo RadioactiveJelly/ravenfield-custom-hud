@@ -109,7 +109,7 @@ function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
 			else
 				bonus = bonus + 25
 				if message == "" then
-					message = "Offenseive Kill!"
+					message = "Offensive Kill!"
 				else
 					message = message .. "\nOffense Kill!"
 				end
