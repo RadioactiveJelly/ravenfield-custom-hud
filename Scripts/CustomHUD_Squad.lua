@@ -6,10 +6,18 @@ function CustomHUD_Squad:Awake()
 end
 
 function CustomHUD_Squad:Start()
-	self.script.AddValueMonitor("monitorSquadText", "updateSquadText")
-	self:updateSquadText()
+	
+	self.squadTextVisibility = self.script.mutator.GetConfigurationBool("squadTextVisibility")
+	
+	if self.squadTextVisibility then
+		self.script.AddValueMonitor("monitorSquadText", "updateSquadText")
+		self:updateSquadText()
+	else
+		self.squadText.gameObject.SetActive(false)
+	end
+	
 
-	print("<color=lightblue>[Custom HUD]Initialized Squad Display Module v1.0.1 </color>")
+	print("<color=lightblue>[Custom HUD]Initialized Squad Display Module v1.1.0 </color>")
 end
 
 function CustomHUD_Squad:monitorSquadText()

@@ -117,7 +117,7 @@ end
 
 function GameMessage:Kill()
 	self.lifeTime = 0
-	self.fadeScale = 8
+	self.fadeScale = 16
 end
 
 function GameMessage:Show(startPos)

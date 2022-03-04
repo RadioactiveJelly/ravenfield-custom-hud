@@ -2,44 +2,9 @@
 behaviour("CustomHUD_Main")
 
 function CustomHUD_Main:Start()
-	-- Run when behaviour is created
-	GameEvents.onActorDied.AddListener(self,"onActorDied")
-	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
-	
 	self.dataContainer = self.gameObject.GetComponent(DataContainer)
 	
 	self:DisableDefaultHUD()
-	
-	self.targets.Canvas.enabled = false
-
-	if self.targets.WeaponHUD then
-		self.script.AddValueMonitor("monitorCurrentWeapon", "onChangeWeapon")
-		self.weaponHUDVisibility = self.script.mutator.GetConfigurationBool("weaponHUDVisibility")
-	end
-	
-	if self.targets.HealthBar then
-		self.healthBarVisibility = self.script.mutator.GetConfigurationBool("healthBarVisibility")
-		self.targets.HealthBar.SetActive(self.healthBarVisibility)
-	end
-	if self.targets.PlayerName then
-		self.playerNameVisibility = self.script.mutator.GetConfigurationBool("playerNameVisibility")
-		self.targets.PlayerName.SetActive(self.playerNameVisibility or not GameManager.isLegitimate or Player.actor.name == "Unknown Player")
-	end
-
-	if self.targets.VehicleHUD then
-		self.vehicleHUDVisibility = self.script.mutator.GetConfigurationBool("vehicleHUDVisibility")
-		self.targets.VehicleHUD.SetActive(self.vehicleHUDVisibility)
-	end
-	
-	if self.targets.SquadHUD then
-		self.squadTextVisibility = self.script.mutator.GetConfigurationBool("squadTextVisibility")
-		self.targets.SquadHUD.SetActive(self.squadTextVisibility)
-	end
-	
-	if self.targets.HealthNumber then
-		self.healthNumberVisibility = self.script.mutator.GetConfigurationBool("healthNumberVisibility")
-		self.targets.HealthNumber.SetActive(self.healthNumberVisibility)
-	end
 
 	if GameManager.buildNumber < 25 then
 		print("<color=red>[Custom HUD]You are using build number: " .. GameManager.buildNumber  .. " please update to the latest game version!</color>")
@@ -48,12 +13,7 @@ function CustomHUD_Main:Start()
 
 	local hudVersion = self.dataContainer.GetString("hudVersion")
 	print("<color=lightblue>[Custom HUD]Using HUD Style: </color>" .. self.dataContainer.GetString("hudName") .. "<color=lightblue> v" .. hudVersion .. "</color>")
-	
-	--print("<color=lightblue>[Custom HUD]HUD Version: " .. majorVersion .. "." .. minorVersion .. "." .. patchVersion .. "</color>")
-	print("<color=lightblue>[Custom HUD]Initialized Main script v1.4.2</color>")
-	
-	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
-	
+	print("<color=lightblue>[Custom HUD]Initialized Main script v1.5.0</color>")
 end
 
 function CustomHUD_Main:monitorCurrentWeapon()

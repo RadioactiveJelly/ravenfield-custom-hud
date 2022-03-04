@@ -54,13 +54,47 @@ MonoBehaviour:
         displayName: <color=grey> Will replace the display name with the above text.
           Leave blank to use your Steam name. </color>
         orderPriority: 3
+      - id: gameFeedLabel
+        displayName: Game Feed Settings
+        orderPriority: 5
+      - id: spriteLabel
+        displayName: <color=grey>^^The bigger the smaller the weapon sprites in the
+          killfeed wil be.</color>
+        orderPriority: 16
+      - id: scoreSystemLabel
+        displayName: <color=#FFF986>Score System</color>
+        orderPriority: 17
       integers: []
-      floats: []
-      ranges: []
+      floats:
+      - id: weaponSpriteScale
+        displayName: Weapon Sprite Scale
+        orderPriority: 12
+        value: 15
+      ranges:
+      - id: feedLimit
+        displayName: Feed Limit
+        orderPriority: 7
+        value:
+          value: 5
+          min: 1
+          max: 10
+          wholeNumbers: 1
       strings:
       - id: displayName
         displayName: Display Name
         orderPriority: 2
+        value: 
+      - id: showWeaponText
+        displayName: Show Weapon Text
+        orderPriority: 3
+        value: T
+      - id: blueTeamName
+        displayName: <color=blue>Blue</color> Team Name (blank = default)
+        orderPriority: 10
+        value: 
+      - id: redTeamName
+        displayName: <color=red>Red</color> Team Name (blank = default)
+        orderPriority: 11
         value: 
       bools:
       - id: healthBarVisibility
@@ -87,4 +121,20 @@ MonoBehaviour:
         displayName: Display Health Number
         orderPriority: 0
         value: 0
+      - id: displayKills
+        displayName: Display Kills
+        orderPriority: 8
+        value: 1
+      - id: showCapturePointUpdates
+        displayName: Capture Point Updates
+        orderPriority: 9
+        value: 1
+      - id: scoreSystemEnabled
+        displayName: Enabled
+        orderPriority: 18
+        value: 1
+      - id: feedEnabled
+        displayName: Enabled
+        orderPriority: 6
+        value: 1
       dropdowns: []

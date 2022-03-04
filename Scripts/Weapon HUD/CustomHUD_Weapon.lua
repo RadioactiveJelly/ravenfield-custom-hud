@@ -6,13 +6,22 @@ function CustomHUD_Weapon:Awake()
 end
 
 function CustomHUD_Weapon:Start()
+	GameEvents.onActorDied.AddListener(self,"onActorDied")
+	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+
+	self.targets.Canvas.enabled = false
+
 	self.script.AddValueMonitor("monitorCurrentWeapon", "onChangeWeapon")
 	self.script.AddValueMonitor("monitorHeat", "onHeatChange")
 	self.script.AddValueMonitor("monitorFireMode", "onFireModeChange")
 
 	self.script.AddValueMonitor("monitorSightModeText", "onSightModeChange")
 
-	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.2.1 </color>")
+	self.weaponHUDVisibility = self.script.mutator.GetConfigurationBool("weaponHUDVisibility")
+	
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
+
+	print("<color=lightblue>[Custom HUD]Initialized Weapon Display Module v1.3.0 </color>")
 end
 
 function CustomHUD_Weapon:monitorCurrentWeapon()
@@ -23,10 +32,11 @@ function CustomHUD_Weapon:onChangeWeapon()
 	if Player.actor.activeWeapon == nil then
 		return
 	end
+
 	local name = ""
 	if Player.actor.activeWeapon.weaponEntry then
 		name = Player.actor.activeWeapon.weaponEntry.name
-		name = self:CleanString(name,"EXTAS", "EXTAS%s-%s")
+		name = self:CleanString(name,"EXTAS", "EXTAS%s+-%s")
 		name = self:CleanString(name,"RWP2_", "RWP2_")
 	else
 		name = Player.actor.activeWeapon.gameObject.name
@@ -44,6 +54,14 @@ function CustomHUD_Weapon:onChangeWeapon()
 	self.targets.AmmoDisplay.self:onSpareAmmoChange(Player.actor.activeWeapon.activeSubWeapon.spareAmmo)
 
 	self.targets.weaponName.text = name
+end
+
+function CustomHUD_Weapon:monitorHUDVisibility()
+	return GameManager.hudPlayerEnabled
+end
+
+function CustomHUD_Weapon:onHUDVisibilityChange()
+	self.targets.Canvas.enabled = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.weaponHUDVisibility
 end
 
 function CustomHUD_Weapon:CleanString(str, target, format)
@@ -97,4 +115,16 @@ end
 
 function CustomHUD_Weapon:onSightModeChange()
 	self.targets.SightMode.text = self.sightText.text
+end
+
+function CustomHUD_Weapon:onActorSpawn(actor)
+	if actor.isPlayer then
+		self.targets.Canvas.enabled = GameManager.hudPlayerEnabled and self.weaponHUDVisibility
+	end
+end
+
+function CustomHUD_Weapon:onActorDied(actor,source,isSilent)
+	if actor.isPlayer then
+		self.targets.Canvas.enabled = false
+	end
 end

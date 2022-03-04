@@ -2,7 +2,10 @@
 behaviour("CustomHUD_HealthBar")
 
 function CustomHUD_HealthBar:Start()
+	GameEvents.onActorDied.AddListener(self,"onActorDied")
 	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+
+	self.targets.Canvas.enabled = false
 
 	local enhancedHealthObj = self.gameObject.Find("EnhancedHealth")
 	if enhancedHealthObj then
@@ -16,7 +19,19 @@ function CustomHUD_HealthBar:Start()
 		self.script.AddValueMonitor("monitorCurrentMaxHealth", "updateHealthUI")
 	end
 	
-	print("<color=lightblue>[Custom HUD]Initialized Health Bar Module v1.1.0 </color>")
+	self.healthBarVisibility = self.script.mutator.GetConfigurationBool("healthBarVisibility")
+
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
+
+	print("<color=lightblue>[Custom HUD]Initialized Health Bar Module v1.2.0 </color>")
+end
+
+function CustomHUD_HealthBar:monitorHUDVisibility()
+	return PlayerHud.hudPlayerEnabled
+end
+
+function CustomHUD_HealthBar:onHUDVisibilityChange()
+	self.targets.Canvas.enabled = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.healthBarVisibility
 end
 
 function CustomHUD_HealthBar:monitorCurrentHealth()
@@ -85,5 +100,12 @@ end
 function CustomHUD_HealthBar:onActorSpawn(actor)
 	if actor.isPlayer then
 		self.targets.redFlash.color = Color(1,0,0,0)
+		self.targets.Canvas.enabled = GameManager.hudPlayerEnabled and self.healthBarVisibility
+	end
+end
+
+function CustomHUD_HealthBar:onActorDied(actor,source,isSilent)
+	if actor.isPlayer then
+		self.targets.Canvas.enabled = false
 	end
 end

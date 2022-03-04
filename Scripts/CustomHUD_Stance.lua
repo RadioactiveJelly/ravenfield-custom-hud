@@ -7,7 +7,7 @@ function CustomHUD_Stance:Start()
 	self.script.AddValueMonitor("MonitorProne", "UpdateStance")
 	self.script.AddValueMonitor("MonitorCrouch", "UpdateStance")
 
-	if self.dataContainer then
+	if self.dataContainer and Player.actor.team ~= Team.Neutral then
 		if self.dataContainer.GetBool("useTeamColors") then
 			local colorVector = nil
 			if Player.actor.team == Team.Blue then

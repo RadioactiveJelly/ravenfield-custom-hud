@@ -54,7 +54,7 @@ function CustomHUD_QuickThrow:ReplaceQuickThrowHUD()
 end
 
 function CustomHUD_QuickThrow:TeamColor()
-	if self.dataContainer then
+	if self.dataContainer and Player.actor.team ~= Team.Neutral then
 		if self.dataContainer.GetBool("useTeamColors") then
 			local colorVector = nil
 			if Player.actor.team == Team.Blue then

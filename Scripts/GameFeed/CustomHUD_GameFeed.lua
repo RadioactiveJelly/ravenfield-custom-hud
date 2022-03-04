@@ -1,9 +1,14 @@
 -- Register the behaviour
 behaviour("CustomHUD_GameFeed")
 
+function CustomHUD_GameFeed:Awake()
+	self.feedEnabled = self.script.mutator.GetConfigurationBool("feedEnabled")
+end
+
 function CustomHUD_GameFeed:Start()
 	-- Run when behaviour is created
 	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+	GameEvents.onMatchEnd.AddListener(self,"onMatchEnd")
 
 	self.dataContainer = self.gameObject.GetComponent(DataContainer)
 	self.gameMessagePrefab = self.dataContainer.GetGameObject("GameMessagePrefab")
@@ -16,7 +21,7 @@ function CustomHUD_GameFeed:Start()
 	self.blueTeamColor = self.dataContainer.GetColor("blueTeamColor")
 	self.redTeamColor = self.dataContainer.GetColor("redTeamColor")
 
-	self.feedEnabled = self.script.mutator.GetConfigurationBool("feedEnabled")
+	
 
 	local bString = self.script.mutator.GetConfigurationString("blueTeamName")
 	local rString = self.script.mutator.GetConfigurationString("redTeamName")
@@ -33,16 +38,7 @@ function CustomHUD_GameFeed:Start()
 		self.redTeamName = rString
 	end 
 	
-	local showKills = self.script.mutator.GetConfigurationBool("displayKills")
-	if showKills and self.feedEnabled then
-		GameEvents.onActorDied.AddListener(self,"onActorDied")
-	end
-
-	local showCapturePointUpdates = self.script.mutator.GetConfigurationBool("showCapturePointUpdates")
-	if showCapturePointUpdates and self.feedEnabled then
-		GameEvents.onCapturePointCaptured.AddListener(self,"onCapturePointCaptured")
-		GameEvents.onCapturePointNeutralized.AddListener(self,"onCapturePointNeutralized")
-	end
+	
 
 	self.blueTeamText = "<color=" .. self.blueTeamHexCode .. ">" .. self.blueTeamName .. "</color>"
 	self.redTeamText = "<color=" .. self.redTeamHexCode .. ">" .. self.redTeamName .. "</color>"
@@ -64,23 +60,42 @@ function CustomHUD_GameFeed:Start()
 
 	self.weaponSpriteScale = self.script.mutator.GetConfigurationFloat("weaponSpriteScale")
 
-	print("<color=lightblue>[Custom HUD]Initialized Game Feed Module v1.0.0</color>")
+	self.messageRequests = 0
+	self.messagesCreated = 0
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
+	local showKills = self.script.mutator.GetConfigurationBool("displayKills")
+	if showKills and self.feedEnabled then
+		GameEvents.onActorDied.AddListener(self,"onActorDied")
+	end
+
+	local showCapturePointUpdates = self.script.mutator.GetConfigurationBool("showCapturePointUpdates")
+	if showCapturePointUpdates and self.feedEnabled then
+		GameEvents.onCapturePointCaptured.AddListener(self,"onCapturePointCaptured")
+		GameEvents.onCapturePointNeutralized.AddListener(self,"onCapturePointNeutralized")
+	end
+
+	self.isValid = true
+	print("<color=lightblue>[Custom HUD] Initialized Game Feed Module v1.0.0</color>")
+end
+
+function CustomHUD_GameFeed:OnDisable()
+	self.isValid = false
 end
 
 function CustomHUD_GameFeed:Update()
 
-	--[[if (Input.GetKeyDown(KeyCode.O)) then
+	if (Input.GetKeyDown(KeyCode.O)) then
 		local newMessage = self:RequestMessageObject()
 
 		newMessage.self:WriteCaptureMessage("We captured a point!", Color.grey)
 
 		self:PushMessage(newMessage)
-	end]]--
+	end
 
 	if #self.messageQueue > 0 and not self.locked then
 		local topMessage = self.messageQueue[#self.messageQueue]
 		if topMessage.self.isDead then
-			table.remove(self.messageQueue,#self.messageQueue)
+			self.messageQueue[#self.messageQueue] = nil
 			--return to pool
 			table.insert(self.messagePool, 1, topMessage)
 		end
@@ -170,7 +185,7 @@ function CustomHUD_GameFeed:CleanString(str, target, format)
 end
 
 function CustomHUD_GameFeed:onCapturePointCaptured(capturePoint, newOwner)
-	if self.hasSpawnedOnce and not Player.actor.isDead then
+	if self.isValid and self.hasSpawnedOnce or Player.actor.team == Team.Neutral then
 		local capturePointText = capturePoint.name
 
 		local newMessage = self:RequestMessageObject()
@@ -188,7 +203,7 @@ function CustomHUD_GameFeed:onCapturePointCaptured(capturePoint, newOwner)
 end
 
 function CustomHUD_GameFeed:onCapturePointNeutralized(capturePoint, previousOwner)
-	if self.hasSpawnedOnce and not Player.actor.isDead then
+	if self.isValid and self.hasSpawnedOnce or Player.actor.team == Team.Neutral then
 		local capturePointText = capturePoint.name
 
 		local newMessage = self:RequestMessageObject()
@@ -204,12 +219,20 @@ function CustomHUD_GameFeed:onCapturePointNeutralized(capturePoint, previousOwne
 	end
 end
 
+function CustomHUD_GameFeed:onMatchEnd(team)
+	print("<color=lightblue>[Custom HUD][Game Feed] Total Message Object Requests: " .. self.messageRequests .. "</color>")
+	print("<color=lightblue>[Custom HUD][Game Feed] Message Objects In Pool: " .. self.messagesCreated .. "</color>")
+end
+
 function CustomHUD_GameFeed:onActorSpawn(actor)
 	if(actor == Player.actor) then
 		self.hasSpawnedOnce = true
 	end
 end
 
+
+--Use a dynamic object pool to lessen the calls on instantiate/destroy. 
+--This will help lessen the overall CPU usage, especially with high amounts of incoming messages.
 function CustomHUD_GameFeed:RequestMessageObject()
 	local messageObject = nil
 	if #self.messagePool > 0 then
@@ -217,9 +240,19 @@ function CustomHUD_GameFeed:RequestMessageObject()
 		table.remove(self.messagePool,1)
 	else
 		messageObject = self.gameObject.Instantiate(self.gameMessagePrefab).GetComponent(ScriptedBehaviour)
+		self.messagesCreated = self.messagesCreated + 1
 	end
 	messageObject.self:InitVariables(self.weaponSpriteScale)
-	messageObject.gameObject.transform.parent = self.gameObject.transform
+	messageObject.gameObject.transform.SetParent(self.gameObject.transform, false)
 	messageObject.gameObject.transform.localPosition = Vector3(322,0,0)
+	self.messageRequests = self.messageRequests + 1
 	return messageObject
+end
+
+function CustomHUD_GameFeed:monitorHUDVisibility()
+	return GameManager.hudPlayerEnabled
+end
+
+function CustomHUD_GameFeed:onHUDVisibilityChange()
+	self.targets.Canvas.enabled = GameManager.hudPlayerEnabled
 end

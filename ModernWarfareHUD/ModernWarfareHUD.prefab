@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mutators:
   - name: <color=lime>Modern Warfare</color> Style HUD
-    description: <color=lime>v 2.0.2</color>
+    description: <color=lime>v 2.0.5</color>
     menuImage: {fileID: 2800000, guid: 0d503b58187b3f2498d5d054ad6bf4fc, type: 3}
     mutatorPrefab: {fileID: 1903859750217240, guid: 8881edda5f100bf4a9ddb17b6ca87784, type: 3}
     configuration:

@@ -33,6 +33,7 @@ function MWHUD_ScoreSystem:Start()
 		GameEvents.onMatchEnd.AddListener(self,"onMatchEnd")
 		print("<color=lime>[MW HUD]Initialized Score System v1.0.0</color>")
 	end
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
 end
 
 function MWHUD_ScoreSystem:Update()
@@ -76,10 +77,6 @@ function MWHUD_ScoreSystem:Update()
 		end
 		self.pointsText.gameObject.transform.localScale = Vector3(self.scale, self.scale, 0)
 	end
-
-	--[[if Input.GetKeyDown(KeyCode.O) then
-		self:Score(10,"Defense Kill!\nOffense Kill!")
-	end]]--
 end
 
 function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
@@ -109,7 +106,7 @@ function MWHUD_ScoreSystem:onActorDied(actor, source, isSilent)
 			else
 				bonus = bonus + 25
 				if message == "" then
-					message = "Offenseive Kill!"
+					message = "Offensive Kill!"
 				else
 					message = message .. "\nOffense Kill!"
 				end
@@ -171,4 +168,13 @@ function MWHUD_ScoreSystem:MatchEnd(team)
 	end
 	
 	self.matchFinished = true
+end
+
+function MWHUD_ScoreSystem:monitorHUDVisibility()
+	return GameManager.hudPlayerEnabled
+end
+
+function MWHUD_ScoreSystem:onHUDVisibilityChange()
+	self.targets.Canvas.enabled = GameManager.hudPlayerEnabled
+	self.targets.FinalText.gameObject.SetActive(GameManager.hudPlayerEnabled and self.matchFinished)
 end

@@ -4,7 +4,7 @@ behaviour("CustomHUD_SimpleCompass")
 function CustomHUD_SimpleCompass:Start()
 	-- Run when behaviour is created
 	self.dataContainer = self.gameObject.GetComponent(DataContainer)
-	if self.dataContainer then
+	if self.dataContainer and Player.actor.team ~= Team.Neutral then
 		if self.dataContainer.GetBool("useTeamColor") then
 			local colorVector = nil
 			if Player.actor.team == Team.Blue then

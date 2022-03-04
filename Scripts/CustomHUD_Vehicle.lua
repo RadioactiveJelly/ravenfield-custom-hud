@@ -5,8 +5,20 @@ function CustomHUD_Vehicle:Start()
 	self.script.AddValueMonitor("monitorVehicle","updateVehicleHUD")
 	self.script.AddValueMonitor("monitorVehicleHealth", "updateVehicleHealth")
 
-	print("<color=lightblue>[Custom HUD]Initialized Vehicle Display Module v1.1.0 </color>")
-	self:SetActive(false)
+	self.vehicleHUDVisibility = self.script.mutator.GetConfigurationBool("vehicleHUDVisibility")
+
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
+
+	self.targets.Canvas.enabled = false
+	print("<color=lightblue>[Custom HUD]Initialized Vehicle Display Module v1.2.0 </color>")
+end
+
+function CustomHUD_Vehicle:monitorHUDVisibility()
+	return GameManager.hudPlayerEnabled
+end
+
+function CustomHUD_Vehicle:onHUDVisibilityChange()
+	self.targets.Canvas.enabled = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.vehicleHUDVisibility and not Player.actor.activeVehicle == nil
 end
 
 function CustomHUD_Vehicle:monitorVehicle()
@@ -23,11 +35,11 @@ end
 
 function CustomHUD_Vehicle:updateVehicleHUD()
 	if Player.actor.activeVehicle then
-		self:SetActive(true)
+		self.targets.Canvas.enabled = true
 		self.targets.vehicleName.text = Player.actor.activeVehicle.name
 		self:updateVehicleHealth()
 	else
-		self:SetActive(false)
+		self.targets.Canvas.enabled = false
 	end
 end
 
