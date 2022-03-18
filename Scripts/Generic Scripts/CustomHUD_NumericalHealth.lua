@@ -50,10 +50,6 @@ function CustomHUD_NumericalHealth:Update()
 			self.targets.HealthText.text = Mathf.Ceil(self.displayValue)
 		end
 	end
-
-	if Input.GetKeyDown(KeyCode.I) then
-		Player.actor.Damage(99)
-	end
 end
 
 function CustomHUD_NumericalHealth:onHealthChanged()

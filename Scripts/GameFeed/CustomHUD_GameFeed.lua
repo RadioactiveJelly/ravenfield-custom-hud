@@ -84,13 +84,13 @@ end
 
 function CustomHUD_GameFeed:Update()
 
-	if (Input.GetKeyDown(KeyCode.O)) then
+	--[[if (Input.GetKeyDown(KeyCode.O)) then
 		local newMessage = self:RequestMessageObject()
 
 		newMessage.self:WriteCaptureMessage("We captured a point!", Color.grey)
 
 		self:PushMessage(newMessage)
-	end
+	end]]--
 
 	if #self.messageQueue > 0 and not self.locked then
 		local topMessage = self.messageQueue[#self.messageQueue]
