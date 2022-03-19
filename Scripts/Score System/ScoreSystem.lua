@@ -24,7 +24,7 @@ function ScoreSystem:Update()
 end
 
 function ScoreSystem:onActorDied(actor, source, isSilent)
-	if source.isPlayer and actor.team ~= Player.actor.team then
+	if source and source.isPlayer and actor.team ~= Player.actor.team then
 		self:AddScore(self.pointsPerKill, false, true)
 	end
 
