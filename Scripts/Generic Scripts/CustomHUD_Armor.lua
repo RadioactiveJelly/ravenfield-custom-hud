@@ -4,20 +4,25 @@ behaviour("CustomHUD_Armor")
 function CustomHUD_Armor:Start()
 	self.armorText = self.targets.armorText
 	self.armorPlateText = self.targets.armorPlateText
-	local armorObj = self.gameObject.Find("PlayerArmor")
-	if armorObj then
-		self.playerArmor = armorObj.GetComponent(ScriptedBehaviour)
-		self.playerArmor.self:DisableHUD()
-		self.script.AddValueMonitor("monitorCurrentArmorHealth","onArmorHealthChanged")
-		self.script.AddValueMonitor("monitorCurrentArmorPlates","onArmorPlateCountChanged")
-		GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
-		self.displayValue = self.playerArmor.self.armorHealth
-	else
-		self.armorText.text =  "---"
-		self.armorPlateText.text = "-"
-	end
+	self.script.StartCoroutine(self:DelayedStart())
+end
 
-	
+function CustomHUD_Armor:DelayedStart()
+	return function()
+		coroutine.yield(WaitForSeconds(0.1))
+		local armorObj = self.gameObject.Find("PlayerArmor")
+		if armorObj then
+			self.playerArmor = armorObj.GetComponent(ScriptedBehaviour)
+			self.playerArmor.self:DisableHUD()
+			self.script.AddValueMonitor("monitorCurrentArmorHealth","onArmorHealthChanged")
+			self.script.AddValueMonitor("monitorCurrentArmorPlates","onArmorPlateCountChanged")
+			GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+			self.displayValue = self.playerArmor.self.armorHealth
+		else
+			self.armorText.text =  "---"
+			self.armorPlateText.text = "-"
+		end
+	end
 end
 
 function CustomHUD_Armor:Update()
