@@ -65,7 +65,7 @@ function CustomHUD_GameFeed:Start()
 	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
 	local showKills = self.script.mutator.GetConfigurationBool("displayKills")
 	if showKills and self.feedEnabled then
-		GameEvents.onActorDied.AddListener(self,"onActorDied")
+		GameEvents.onActorDiedInfo.AddListener(self,"onActorDiedInfo")
 	end
 
 	local showCapturePointUpdates = self.script.mutator.GetConfigurationBool("showCapturePointUpdates")
@@ -124,7 +124,8 @@ function CustomHUD_GameFeed:PushMessage(message)
 	self.locked = false
 end
 
-function CustomHUD_GameFeed:onActorDied(actor, source, isSilent)
+function CustomHUD_GameFeed:onActorDiedInfo(actor, info, isSilent)
+	local source = info.sourceActor
 	local actorName = actor.name
 	if actor.isPlayer then
 		actorName = self.playerName
@@ -153,10 +154,11 @@ function CustomHUD_GameFeed:onActorDied(actor, source, isSilent)
 			sourceName = "<color=" .. self.redTeamHexCode .. ">" .. sourceName .. "</color>"
 		end
 
-		if source.activeWeapon then
+		local weaponEntry = info.sourceWeaponEntry
+		if weaponEntry then
 			local weaponSprite = nil
 			if source.activeWeapon.weaponEntry then
-				weaponSprite = source.activeWeapon.weaponEntry.uiSprite
+				weaponSprite = weaponEntry.uiSprite
 				newMessage.self:WriteKillMessage(sourceName, actorName, weaponSprite)
 			else
 				local weaponName = ""
