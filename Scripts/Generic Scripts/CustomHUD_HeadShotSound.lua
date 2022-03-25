@@ -4,7 +4,7 @@ behaviour("CustomHUD_HeadShotSound")
 function CustomHUD_HeadShotSound:Start()
 	GameEvents.onActorDiedInfo.AddListener(self,"onActorDiedInfo")
 	self.soundBank = self.targets.soundBank
-	self.targets.soundSource.SetOutputAudioMixer(AudioMixer.FirstPerson)
+	self.targets.soundSource.SetOutputAudioMixer(AudioMixer.Master)
 end
 
 function CustomHUD_HeadShotSound:onActorDiedInfo(actor, info, isSilent)
