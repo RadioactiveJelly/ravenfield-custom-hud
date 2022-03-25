@@ -5329,6 +5329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _scoreSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 2603021950208872071, guid: 084ad64cb6c1fae4d927b47405e16252, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5641177981434492230, guid: 084ad64cb6c1fae4d927b47405e16252, type: 3}
       propertyPath: m_Pivot.x
       value: 0
