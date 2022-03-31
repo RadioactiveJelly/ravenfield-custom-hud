@@ -9,10 +9,16 @@ function CustomHUD_TickerCompass:Start()
 	if self.dataContainer then
 		self.northColor = self.dataContainer.GetColor("_north")
 	end
+
+	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
+	GameEvents.onActorDiedInfo.AddListener(self,"onActorDiedInfo")
+
+	self.targets.CanvasGroup.alpha = 0
+
+	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
 end
 
 function CustomHUD_TickerCompass:Update()
-	-- Run every frame
 	if Player.actor and not Player.actor.isDead then
 		local anglePlayer = PlayerCamera.fpCamera.transform.eulerAngles.y
 		
@@ -50,5 +56,30 @@ function CustomHUD_TickerCompass:Update()
 				self.lastAngle = anglePlayer
 			end
 		end
+	end
+end
+
+function CustomHUD_TickerCompass:monitorHUDVisibility()
+	return PlayerHud.hudPlayerEnabled
+end
+
+function CustomHUD_TickerCompass:onHUDVisibilityChange()
+	local visible = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.healthNumberVisibility
+	local alpha = 1
+	if not visible then
+		alpha = 0
+	end
+	self.targets.CanvasGroup.alpha = alpha
+end
+
+function CustomHUD_TickerCompass:onActorDiedInfo(actor, info, isSilent)
+	if actor.isPlayer then
+		self.targets.CanvasGroup.alpha = 0
+	end
+end
+
+function CustomHUD_TickerCompass:onActorSpawn(actor)
+	if actor.isPlayer then
+		self.targets.CanvasGroup.alpha = 1
 	end
 end

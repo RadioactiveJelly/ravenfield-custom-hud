@@ -157,7 +157,7 @@ function CustomHUD_GameFeed:onActorDiedInfo(actor, info, isSilent)
 		local weaponEntry = info.sourceWeaponEntry
 		if weaponEntry then
 			local weaponSprite = nil
-			if source.activeWeapon.weaponEntry then
+			if weaponEntry then
 				weaponSprite = weaponEntry.uiSprite
 				newMessage.self:WriteKillMessage(sourceName, actorName, weaponSprite)
 			else

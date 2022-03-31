@@ -3,7 +3,7 @@ behaviour("CustomHUD_NumericalHealth")
 
 function CustomHUD_NumericalHealth:Start()
 	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
-	GameEvents.onActorDied.AddListener(self,"onActorDied")
+	GameEvents.onActorDiedInfo.AddListener(self,"onActorDiedInfo")
 	self.script.AddValueMonitor("monitorCurrentHealth","onHealthChanged")
 	self.maxHealth = 100
 
@@ -83,7 +83,7 @@ function CustomHUD_NumericalHealth:onActorSpawn(actor)
 	end
 end
 
-function CustomHUD_NumericalHealth:onActorDied(actor,source,isSilent)
+function CustomHUD_NumericalHealth:onActorDiedInfo(actor, info, isSilent)
 	if actor.isPlayer then
 		self.targets.Canvas.enabled = false
 	end
