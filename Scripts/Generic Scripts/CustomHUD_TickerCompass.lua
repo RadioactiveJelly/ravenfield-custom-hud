@@ -15,6 +15,8 @@ function CustomHUD_TickerCompass:Start()
 
 	self.targets.CanvasGroup.alpha = 0
 
+	self.compassVisibility = self.script.mutator.GetConfigurationBool("compassVisibility")
+
 	self.script.AddValueMonitor("monitorHUDVisibility", "onHUDVisibilityChange")
 end
 
@@ -64,7 +66,7 @@ function CustomHUD_TickerCompass:monitorHUDVisibility()
 end
 
 function CustomHUD_TickerCompass:onHUDVisibilityChange()
-	local visible = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.healthNumberVisibility
+	local visible = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.compassVisibility
 	local alpha = 1
 	if not visible then
 		alpha = 0
@@ -73,13 +75,13 @@ function CustomHUD_TickerCompass:onHUDVisibilityChange()
 end
 
 function CustomHUD_TickerCompass:onActorDiedInfo(actor, info, isSilent)
-	if actor.isPlayer then
+	if actor.isPlayer and self.compassVisibility then
 		self.targets.CanvasGroup.alpha = 0
 	end
 end
 
 function CustomHUD_TickerCompass:onActorSpawn(actor)
-	if actor.isPlayer then
+	if actor.isPlayer and self.compassVisibility then
 		self.targets.CanvasGroup.alpha = 1
 	end
 end
