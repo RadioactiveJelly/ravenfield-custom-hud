@@ -2,6 +2,7 @@
 behaviour("CWHUD_CaptureIndicator")
 
 function CWHUD_CaptureIndicator:Start()
+	self.vanillaIndicator = nil
 	self.targets.capPointName.text = ""
 	self.visibile = false
 
@@ -15,6 +16,14 @@ end
 
 function CWHUD_CaptureIndicator:Update()
 	if Player.actor.currentCapturePoint then
+		
+		if self.vanillaIndicator == nil then
+			self.vanillaIndicator = GameObject.Find("Flag Capture Indicator")
+			local bg = GameObject.Find("Flag Capture Indicator Edge")
+			self.vanillaIndicator.transform.parent.position = Vector3(5000,5000,0)
+			bg.transform.position = Vector3(5000,5000,0)
+		end
+
 		local capPoint = Player.actor.currentCapturePoint
 		self.targets.capPointName.text = capPoint.name
 
