@@ -7,7 +7,9 @@ function CustomHUD_NumericalHealth:Start()
 	self.script.AddValueMonitor("monitorCurrentHealth","onHealthChanged")
 	self.maxHealth = 100
 
-	self.targets.Canvas.enabled = false
+	if self.targets.Canvas then
+		self.targets.Canvas.enabled = false
+	end
 
 	local enhancedHealthObj = self.gameObject.Find("EnhancedHealth")
 	if enhancedHealthObj then
@@ -37,7 +39,8 @@ function CustomHUD_NumericalHealth:monitorHUDVisibility()
 end
 
 function CustomHUD_NumericalHealth:onHUDVisibilityChange()
-	self.targets.Canvas.enabled = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.healthNumberVisibility
+	if self.targets.Canvas == nill then return end
+		self.targets.Canvas.enabled = not Player.actor.isDead and GameManager.hudPlayerEnabled and self.healthNumberVisibility
 end
 
 function CustomHUD_NumericalHealth:Update()
@@ -77,14 +80,16 @@ function CustomHUD_NumericalHealth:onActorSpawn(actor)
 		self.maxHealth = self.enhancedHealth.self.maxHP
 	end
 	if actor.isPlayer then
-		self.targets.Canvas.enabled = GameManager.hudPlayerEnabled and self.healthNumberVisibility
+		if self.targets.Canvas then
+			self.targets.Canvas.enabled = GameManager.hudPlayerEnabled and self.healthNumberVisibility
+		end
 		self.displayValue = Player.actor.health
 		self.targets.HealthText.text = Player.actor.health
 	end
 end
 
 function CustomHUD_NumericalHealth:onActorDiedInfo(actor, info, isSilent)
-	if actor.isPlayer then
+	if actor.isPlayer and self.targets.Canvas then
 		self.targets.Canvas.enabled = false
 	end
 end
