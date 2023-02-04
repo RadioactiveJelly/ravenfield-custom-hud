@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mutators:
   - name: Black Ops <color=red>Cold War</color> Style HUD
-    description: <color=lightblue>v 1.7.0</color>
+    description: <color=lightblue>v 2.0.0</color>
     menuImage: {fileID: 2800000, guid: b96af04c323c14643815972402c1be94, type: 3}
     mutatorPrefab: {fileID: 1730269311931672, guid: da16a97e9466a454cbdae286740a222f, type: 3}
     configuration:
