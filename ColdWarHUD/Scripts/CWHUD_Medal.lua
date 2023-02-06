@@ -16,19 +16,21 @@ function CWHUD_Medal:Init()
 	self.timer = 5.0
 	self.isDead = false
 	self.isShown = false
-	self.animator.SetBool("Dead",false)
 
 	self.gameObject.transform.localScale = Vector3(1,1,1)
 
 	self.targets.canvasGroup.alpha = 0
 
 	self.shrinking = false
+
+	self.animator.ResetTrigger("Hide")
+	self.animator.ResetTrigger("Show")
 end
 
 function CWHUD_Medal:Kill()
 	self.timer = -1
 	self.isDead = true
-	self.animator.SetBool("Dead",true)
+	self.animator.SetTrigger("Hide")
 end
 
 function CWHUD_Medal:SetText(text)

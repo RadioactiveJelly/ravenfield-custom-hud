@@ -15,8 +15,8 @@ function CWHUD_MedalDisplay:Start()
 
 	self.instanceCount = 0
 	
-	self.cooldownTimer = 0
 	self.cooldownValue = 0.4
+	self.cooldownTimer = 0
 end
 
 function CWHUD_MedalDisplay:DelayedStart()
@@ -30,6 +30,17 @@ function CWHUD_MedalDisplay:DelayedStart()
 				self.medalSystem.self:DisableDefaultHUD()
 			end
 		end
+
+		if Debug.isTestMode then
+			local medalSystemObj = self.gameObject.transform.Find("Medal System")
+			if medalSystemObj then
+				self.medalSystem = medalSystemObj.gameObject.GetComponent(ScriptedBehaviour)
+				self.medalSystem.self:DisableDefaultHUD()
+				print("Medal System found!")
+			else
+				print("Medal System not found!")
+			end
+		end
 	end
 end
 
@@ -37,14 +48,15 @@ function CWHUD_MedalDisplay:Update()
 	-- Run every frame
 	if self.medalSystem == nil then return end
 
-	
+	if self.cooldownTimer > 0 then
+		self.cooldownTimer = self.cooldownTimer - Time.deltaTime
+	end
+
 	if #self.medalSystem.self.medalQueue > 0  then
-		if self.cooldownTimer > 0 then
-			self.cooldownTimer = self.cooldownTimer - Time.deltaTime
-		end
+		
+
 		if self.cooldownTimer <= 0 then
 			local topRequest = self.medalSystem.self.medalQueue[1]
-
 			if topRequest then
 				local medal = self:RequestMedalPrefab()
 				medal.self:Show()
