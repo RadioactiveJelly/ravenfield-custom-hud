@@ -6,6 +6,16 @@ function CWHUD_MedalDisplay:Start()
 
 	self.dataContainer = self.gameObject.GetComponent(DataContainer)
 	self.medalPrefab = self.dataContainer.GetGameObject("MedalPrefab")
+
+	self.medalSound = self.script.mutator.GetConfigurationDropdown("MedalSFX")
+	self.medalVolume = 1
+	if self.medalSound == 0 then
+		self.medalSFX = self.dataContainer.GetAudioClip("ColdWarSound")
+	else
+		self.medalSFX = self.dataContainer.GetAudioClip("DefaultSound")
+	end
+	
+	self.targets.audioSource.SetOutputAudioMixer(AudioMixer.Master)
 	
 	self.medalPos = self.targets.medalPos.transform.localPosition
 
@@ -53,15 +63,13 @@ function CWHUD_MedalDisplay:Update()
 	end
 
 	if #self.medalSystem.self.medalQueue > 0  then
-		
-
 		if self.cooldownTimer <= 0 then
 			local topRequest = self.medalSystem.self.medalQueue[1]
 			if topRequest then
 				local medal = self:RequestMedalPrefab()
 				medal.self:Show()
 				self:ProcessRequestData(medal,topRequest)
-				self.targets.audioSource.Play()
+				self.targets.audioSource.PlayOneShot(self.medalSFX, self.medalVolume)
 				table.insert(self.activeMedals, 1, medal)
 				self.cooldownTimer = self.cooldownValue
 

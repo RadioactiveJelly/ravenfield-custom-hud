@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6954075667837635071
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1318068513063272, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_Name
+      value: ColdWarHUD_Linux
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 890.4788
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 494.79745
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474835251648172, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114699944659546690, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: mutators.Array.data[0].name
+      value: Black Ops <color=red>Cold War</color> Style HUD (Linux)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114699944659546690, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}
+      propertyPath: mutators.Array.data[0].menuImage
+      value: 
+      objectReference: {fileID: 2800000, guid: b65eba48a312046428e26223ff4300ba, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 658a114d45f51ba4db1bcae4c3d2101f, type: 3}

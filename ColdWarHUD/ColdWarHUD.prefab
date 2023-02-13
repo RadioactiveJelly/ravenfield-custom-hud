@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mutators:
   - name: Black Ops <color=red>Cold War</color> Style HUD
-    description: <color=lightblue>v 2.0.1</color>
+    description: <color=lightblue>v 3.0.0</color>
     menuImage: {fileID: 2800000, guid: b96af04c323c14643815972402c1be94, type: 3}
     mutatorPrefab: {fileID: 1730269311931672, guid: da16a97e9466a454cbdae286740a222f, type: 3}
     configuration:
@@ -63,7 +63,10 @@ MonoBehaviour:
         orderPriority: 16
       - id: scoreSystemLabel
         displayName: <color=#FFF986>Score System</color>
-        orderPriority: 17
+        orderPriority: 20
+      - id: othersLabel
+        displayName: Others
+        orderPriority: 30
       integers: []
       floats:
       - id: weaponSpriteScale
@@ -129,16 +132,20 @@ MonoBehaviour:
         displayName: Capture Point Updates
         orderPriority: 9
         value: 1
-      - id: scoreSystemEnabled
-        displayName: Enabled
-        orderPriority: 18
-        value: 1
       - id: feedEnabled
         displayName: Enabled
         orderPriority: 6
         value: 1
       - id: compassVisibility
-        displayName: Enabled
-        orderPriority: 7
+        displayName: Compass Enabled
+        orderPriority: 31
         value: 1
-      dropdowns: []
+      dropdowns:
+      - id: MedalSFX
+        displayName: Medal Sound
+        orderPriority: 21
+        value:
+          index: 0
+          labels:
+          - Cold War
+          - Original
