@@ -343,7 +343,7 @@ MonoBehaviour:
   - id: hudName
     value: Black Ops <color=red>Cold War</color>
   - id: hudVersion
-    value: 2.1.0
+    value: 3.0.1
   vectors: []
   rotations: []
   colors: []

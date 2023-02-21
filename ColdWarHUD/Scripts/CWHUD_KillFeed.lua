@@ -2,6 +2,10 @@
 behaviour("CWHUD_KillFeed")
 
 function CWHUD_KillFeed:Start()
+	self.active = self.script.mutator.GetConfigurationBool("killFeedEnabled")
+	if not self.active then return end
+
+
 	GameEvents.onActorDiedInfo.AddListener(self, "onActorDied")
 	GameEvents.onVehicleDisabled.AddListener(self, "onVehicleDisabled")
 	GameEvents.onVehicleDestroyed.AddListener(self, "onVehicleDestroyed")
@@ -42,6 +46,8 @@ function CWHUD_KillFeed:DelayedStart()
 end
 
 function CWHUD_KillFeed:Update()
+	if not self.active then return end
+	
 	for i = 1, #self.activeMessages, 1 do
 		local message = self.activeMessages[i]
 		message.self:Tick()
@@ -61,24 +67,6 @@ function CWHUD_KillFeed:Update()
 			end
 		end
 	end
-
-	--[[if Input.GetKeyDown(KeyCode.T) then
-		for i = 1, 5, 1 do
-			local actorName = "<color=" .. self.redTeamHexCode .. ">" .. "Steel" .. "</color>"
-			local message = self:RequestMessage()
-			message.self:SetText(message.self.ID)
-
-			self:Push(message)
-		end
-	end
-
-	if Input.GetKeyDown(KeyCode.Y) then
-		local actorName = "<color=" .. self.redTeamHexCode .. ">" .. "Steel" .. "</color>"
-		local message = self:RequestMessage()
-		message.self:SetText(message.self.ID)
-
-		self:Push(message)
-	end]]--
 end
 
 function CWHUD_KillFeed:RequestMessage()

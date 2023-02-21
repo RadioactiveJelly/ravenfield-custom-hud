@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mutators:
   - name: Black Ops <color=red>Cold War</color> Style HUD
-    description: <color=lightblue>v 3.0.0</color>
+    description: <color=lightblue>v 3.0.1</color>
     menuImage: {fileID: 2800000, guid: b96af04c323c14643815972402c1be94, type: 3}
     mutatorPrefab: {fileID: 1730269311931672, guid: da16a97e9466a454cbdae286740a222f, type: 3}
     configuration:
@@ -53,88 +53,95 @@ MonoBehaviour:
       - id: displayNameLabel
         displayName: <color=grey> Will replace the display name with the above text.
           Leave blank to use your Steam name. </color>
-        orderPriority: 3
+        orderPriority: 33
       - id: gameFeedLabel
         displayName: Game Feed Settings
-        orderPriority: 5
+        orderPriority: 10
       - id: spriteLabel
         displayName: <color=grey>^^The bigger the smaller the weapon sprites in the
           killfeed wil be.</color>
-        orderPriority: 16
+        orderPriority: 17
       - id: scoreSystemLabel
         displayName: <color=#FFF986>Score System</color>
         orderPriority: 20
       - id: othersLabel
         displayName: Others
         orderPriority: 30
+      - id: generalLabel
+        displayName: General
+        orderPriority: 0
       integers: []
       floats:
       - id: weaponSpriteScale
         displayName: Weapon Sprite Scale
-        orderPriority: 12
+        orderPriority: 17
         value: 15
       ranges:
       - id: feedLimit
         displayName: Feed Limit
-        orderPriority: 7
+        orderPriority: 12
         value:
           value: 5
           min: 1
           max: 10
           wholeNumbers: 1
       strings:
-      - id: displayName
-        displayName: Display Name
-        orderPriority: 2
-        value: 
       - id: showWeaponText
         displayName: Show Weapon Text
-        orderPriority: 3
+        orderPriority: 34
         value: T
+      - id: displayName
+        displayName: Display Name
+        orderPriority: 32
+        value: 
       - id: blueTeamName
-        displayName: <color=blue>Blue</color> Team Name (blank = default)
-        orderPriority: 10
+        displayName: <color=#009BFF>Blue</color> Team Name (blank = default)
+        orderPriority: 15
         value: 
       - id: redTeamName
-        displayName: <color=red>Red</color> Team Name (blank = default)
-        orderPriority: 11
+        displayName: <color=#F64B00>Red</color> Team Name (blank = default)
+        orderPriority: 16
         value: 
       bools:
+      - id: healthNumberVisibility
+        displayName: Display Health Number
+        orderPriority: 1
+        value: 0
+      - id: squadTextVisibility
+        displayName: Display Squad Text
+        orderPriority: 2
+        value: 1
       - id: healthBarVisibility
         displayName: Display Health Bar
-        orderPriority: 0
+        orderPriority: 3
         value: 1
       - id: weaponHUDVisibility
         displayName: Display Weapon HUD
-        orderPriority: 0
+        orderPriority: 4
         value: 1
       - id: vehicleHUDVisibility
         displayName: Display Vehicle HUD
-        orderPriority: 0
+        orderPriority: 5
         value: 1
       - id: playerNameVisibility
         displayName: Display Player Name
-        orderPriority: 1
+        orderPriority: 6
         value: 1
-      - id: squadTextVisibility
-        displayName: Display Squad Text
-        orderPriority: 0
-        value: 1
-      - id: healthNumberVisibility
-        displayName: Display Health Number
-        orderPriority: 0
-        value: 0
-      - id: displayKills
-        displayName: Display Kills
-        orderPriority: 8
-        value: 1
-      - id: showCapturePointUpdates
-        displayName: Capture Point Updates
-        orderPriority: 9
+      - id: killFeedEnabled
+        displayName: Override Kill Feed
+        orderPriority: 7
         value: 1
       - id: feedEnabled
         displayName: Enabled
-        orderPriority: 6
+        orderPriority: 11
+        value: 1
+      - id: displayKills
+        displayName: Display Kills
+        orderPriority: 13
+        value: 1
+      - id: showCapturePointUpdates
+        displayName: Capture Point Updates
+        orderPriority: 14
         value: 1
       - id: compassVisibility
         displayName: Compass Enabled
