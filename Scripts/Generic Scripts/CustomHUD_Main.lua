@@ -52,15 +52,26 @@ function CustomHUD_Main:onActorDied(actor,source,isSilent)
 end
 
 function CustomHUD_Main:DisableDefaultHUD()
-	GameObject.Find("Ingame UI Container(Clone)").Find("Ingame UI/Panel").gameObject.GetComponent(Image).color = Color(0,0,0,0)
-	GameObject.Find("Current Ammo Text").gameObject.SetActive(false)
-	GameObject.Find("Spare Ammo Text").gameObject.SetActive(false)
-	GameObject.Find("Vehicle Health Background").gameObject.SetActive(false)
-	GameObject.Find("Resupply Health").gameObject.SetActive(false)
-	GameObject.Find("Resupply Ammo").gameObject.SetActive(false)
-	GameObject.Find("Squad Text").gameObject.GetComponent(Text).color = Color(0,0,0,0)
-	GameObject.Find("Sight Text").gameObject.SetActive(false)
-	GameObject.Find("Weapon Image").gameObject.SetActive(false)
-	GameObject.Find("Health Text").gameObject.transform.parent.gameObject.SetActive(false)
+	if GameManager.buildNumber <= 26 then
+		GameObject.Find("Ingame UI Container(Clone)").Find("Ingame UI/Panel").gameObject.GetComponent(Image).color = Color(0,0,0,0)
+		GameObject.Find("Current Ammo Text").gameObject.SetActive(false)
+		GameObject.Find("Spare Ammo Text").gameObject.SetActive(false)
+		GameObject.Find("Vehicle Health Background").gameObject.SetActive(false)
+		GameObject.Find("Resupply Health").gameObject.SetActive(false)
+		GameObject.Find("Resupply Ammo").gameObject.SetActive(false)
+		GameObject.Find("Squad Text").gameObject.GetComponent(Text).color = Color(0,0,0,0)
+		GameObject.Find("Sight Text").gameObject.SetActive(false)
+		GameObject.Find("Weapon Image").gameObject.SetActive(false)
+		GameObject.Find("Health Text").gameObject.transform.parent.gameObject.SetActive(false)
+	else
+		local newUI = GameObject.Find("Ingame UI Container(Clone)").Find("New Ingame UI")
+		local newWeaponPanel = newUI.Find("Loadout Panel")
+		local newSquadPanel = newUI.Find("Squad Panel")
+		local newPlayerPanel = newUI.Find("Player Panel")
+
+		newWeaponPanel.gameObject.SetActive(false)
+		newSquadPanel.gameObject.SetActive(false)
+		newPlayerPanel.gameObject.SetActive(false)
+	end
 	
 end

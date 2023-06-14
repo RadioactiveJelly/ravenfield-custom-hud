@@ -12,18 +12,24 @@ function CWHUD_CaptureIndicator:Start()
 	self.blueTeamColor = self.targets.ColorData.GetColor("blueTeamColor")
 	self.redTeamColor = self.targets.ColorData.GetColor("redTeamColor")
 	self.neutralColor = self.targets.ColorData.GetColor("neutral")
+
+	if GameManager.buildNumber > 26 then
+		local newUI = GameObject.Find("Ingame UI Container(Clone)").Find("New Ingame UI")
+		local newCapturePanel = newUI.Find("Capture Panel")
+		newCapturePanel.transform.position = Vector3(5000,5000,0)
+	end
 end
 
 function CWHUD_CaptureIndicator:Update()
 	if Player.actor.currentCapturePoint then
-		
-		if self.vanillaIndicator == nil then
-			self.vanillaIndicator = GameObject.Find("Flag Capture Indicator")
-			local bg = GameObject.Find("Flag Capture Indicator Edge")
-			self.vanillaIndicator.transform.parent.position = Vector3(5000,5000,0)
-			bg.transform.position = Vector3(5000,5000,0)
+		if GameManager.buildNumber <= 26 then
+			if self.vanillaIndicator == nil then
+				self.vanillaIndicator = GameObject.Find("Flag Capture Indicator")
+				local bg = GameObject.Find("Flag Capture Indicator Edge")
+				self.vanillaIndicator.transform.parent.position = Vector3(5000,5000,0)
+				bg.transform.position = Vector3(5000,5000,0)
+			end
 		end
-
 		local capPoint = Player.actor.currentCapturePoint
 		self.targets.capPointName.text = capPoint.name
 

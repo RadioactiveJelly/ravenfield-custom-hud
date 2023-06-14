@@ -2,7 +2,11 @@
 behaviour("CustomHUD_Weapon")
 
 function CustomHUD_Weapon:Awake()
-	self.sightText = GameObject.Find("Sight Text").GetComponent(Text)
+	if GameManager.buildNumber <= 26 then
+		self.sightText = GameObject.Find("Sight Text").GetComponent(Text)
+	else
+		self.sightText = GameObject.Find("Scope Text").GetComponent(Text)
+	end
 end
 
 function CustomHUD_Weapon:Start()
