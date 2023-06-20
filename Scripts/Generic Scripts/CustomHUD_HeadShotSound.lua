@@ -8,12 +8,10 @@ function CustomHUD_HeadShotSound:Start()
 end
 
 function CustomHUD_HeadShotSound:onActorDiedInfo(actor, info, isSilent)
-
 	local source = info.sourceActor
 	if source and source.isPlayer then
 		if info.isCriticalHit and not info.isSplashDamage then
 			self.soundBank.PlayRandom()
 		end
 	end
-
 end

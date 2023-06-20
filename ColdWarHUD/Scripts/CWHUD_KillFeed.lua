@@ -27,10 +27,15 @@ function CWHUD_KillFeed:Start()
 	self.blueTeamHexCode = self.targets.ColorData.GetString("blueTeamHex")
 	self.redTeamHexCode = self.targets.ColorData.GetString("redTeamHex")
 
-	GameObject.Find("Kill Indicator (1)").gameObject.SetActive(false)
-	GameObject.Find("Kill Indicator (2)").gameObject.SetActive(false)
-	GameObject.Find("Kill Indicator").gameObject.SetActive(false)
-	GameObject.Find("Kill Indicator Parent Panel").gameObject.SetActive(false)
+	if GameManager.buildNumber <= 26 then
+		GameObject.Find("Kill Indicator (1)").gameObject.SetActive(false)
+		GameObject.Find("Kill Indicator (2)").gameObject.SetActive(false)
+		GameObject.Find("Kill Indicator").gameObject.SetActive(false)
+		GameObject.Find("Kill Indicator Parent Panel").gameObject.SetActive(false)
+	else
+		PlayerHud.HideUIElement(UIElement.KillFeed)
+	end
+	
 end
 
 function CWHUD_KillFeed:DelayedStart()

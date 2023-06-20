@@ -14,9 +14,7 @@ function CWHUD_CaptureIndicator:Start()
 	self.neutralColor = self.targets.ColorData.GetColor("neutral")
 
 	if GameManager.buildNumber > 26 then
-		local newUI = GameObject.Find("Ingame UI Container(Clone)").Find("New Ingame UI")
-		local newCapturePanel = newUI.Find("Capture Panel")
-		newCapturePanel.transform.position = Vector3(5000,5000,0)
+		PlayerHud.HideUIElement(UIElement.FlagCaptureProgress)
 	end
 end
 

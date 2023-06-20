@@ -1,4 +1,4 @@
-﻿-- Register the behaviour
+-- Register the behaviour
 behaviour("CustomHUD_Main")
 
 function CustomHUD_Main:Start()
@@ -53,6 +53,7 @@ end
 
 function CustomHUD_Main:DisableDefaultHUD()
 	if GameManager.buildNumber <= 26 then
+		--TODO: Soon to be deprecated, remove when Beta EA27 becomes stable!!!
 		GameObject.Find("Ingame UI Container(Clone)").Find("Ingame UI/Panel").gameObject.GetComponent(Image).color = Color(0,0,0,0)
 		GameObject.Find("Current Ammo Text").gameObject.SetActive(false)
 		GameObject.Find("Spare Ammo Text").gameObject.SetActive(false)
@@ -64,14 +65,13 @@ function CustomHUD_Main:DisableDefaultHUD()
 		GameObject.Find("Weapon Image").gameObject.SetActive(false)
 		GameObject.Find("Health Text").gameObject.transform.parent.gameObject.SetActive(false)
 	else
-		local newUI = GameObject.Find("Ingame UI Container(Clone)").Find("New Ingame UI")
-		local newWeaponPanel = newUI.Find("Loadout Panel")
-		local newSquadPanel = newUI.Find("Squad Panel")
-		local newPlayerPanel = newUI.Find("Player Panel")
-
-		newWeaponPanel.gameObject.SetActive(false)
-		newSquadPanel.gameObject.SetActive(false)
-		newPlayerPanel.gameObject.SetActive(false)
+		--EA27 and above method, more future proof
+		PlayerHud.HideUIElement(UIElement.PlayerHealth)
+		PlayerHud.HideUIElement(UIElement.VehicleInfo)
+		PlayerHud.HideUIElement(UIElement.VehicleRepairInfo)
+		PlayerHud.HideUIElement(UIElement.SquadOrderLabel)
+		PlayerHud.HideUIElement(UIElement.SquadMemberInfo)
+		PlayerHud.HideUIElement(UIElement.WeaponInfo)
 	end
 	
 end
