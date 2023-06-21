@@ -4,19 +4,23 @@ behaviour("CustomHUD_OverlayReplacer")
 function CustomHUD_OverlayReplacer:Start()
 	GameEvents.onActorSpawn.AddListener(self,"onActorSpawn")
 	GameEvents.onCapturePointNeutralized.AddListener(self,"onCapturePointNeutralized")
-
-	local overlayGO = GameObject.Find("Overlay Text").gameObject
-	self.vanillaOverlayText = overlayGO.GetComponentInChildren(Text)
-	self.vanillaOverlayText.color = Color(0,0,0,0)
-	self.vanillaOverlayText.supportRichText = false
-
+	
+	if GameManager.buildNumber <= 26 then
+		local overlayGO = GameObject.Find("Overlay Text").gameObject
+		self.vanillaOverlayText = overlayGO.GetComponentInChildren(Text)
+		self.vanillaOverlayText.color = Color(0,0,0,0)
+		self.vanillaOverlayText.supportRichText = false
+		self.script.AddValueMonitor("monitorOverlayText", "deprecatedOnOverlayTextChange")
+	else
+		PlayerHud.HideUIElement(UIElement.OverlayText)
+		GameEvents.onOverlayText.AddListener(self,"OnOverlayTextChange")
+	end
+	
 	self.overlayText = self.targets.overlayText
 
 	self.hasSpawned = false
 
 	self.lifeTime = 1
-
-	self.script.AddValueMonitor("monitorOverlayText", "onOverlayTextChange")
 
 	local bString = self.script.mutator.GetConfigurationString("blueTeamName")
 	local rString = self.script.mutator.GetConfigurationString("redTeamName")
@@ -49,18 +53,19 @@ end
 
 function CustomHUD_OverlayReplacer:Update()
 	-- Run every frame
-	--[[if Input.GetKeyDown(KeyCode.O) then
+	if Input.GetKeyDown(KeyCode.O) then
 		Overlay.ShowMessage("This is a test!", 5)
 	end
 
 	if Input.GetKeyDown(KeyCode.I) then
 		Overlay.ShowMessage("This is a test!2", 5)
-	end]]--
+	end
 
 	if self.lifeTime > 0 then
 		self.lifeTime = self.lifeTime - Time.deltaTime
+	else
 		if self.lifeTime <= 0 then
-			self.targets.canvasGroup.alpha = 0
+			self.targets.canvasGroup.alpha = self.targets.canvasGroup.alpha -  (1.5 * Time.deltaTime)
 		end
 	end
 end
@@ -69,15 +74,16 @@ function CustomHUD_OverlayReplacer:monitorOverlayText()
 	return self.vanillaOverlayText.text
 end
 
-function CustomHUD_OverlayReplacer:onOverlayTextChange()
-	self:UpdateText(self.vanillaOverlayText.text)
+function CustomHUD_OverlayReplacer:deprecatedOnOverlayTextChange()
+	self:UpdateText(self.vanillaOverlayText.text, 3)
 end
 
-function CustomHUD_OverlayReplacer:UpdateText(text)
+function CustomHUD_OverlayReplacer:UpdateText(text, duration)
 	if text == "" then
 		return
 	end
-	self.lifeTime = 3
+	self.lifeTime = duration
+	print(duration)
 
 	local formattedText = text
 
@@ -93,6 +99,10 @@ function CustomHUD_OverlayReplacer:UpdateText(text)
 	self.targets.canvasGroup.alpha = 1
 	self.targets.newOverlay.text = formattedText
 	print(formattedText)
+end
+
+function CustomHUD_OverlayReplacer:OnOverlayTextChange(text, duration)
+	self:UpdateText(text, duration)
 end
 
 function CustomHUD_OverlayReplacer:onActorSpawn(actor)

@@ -31,8 +31,8 @@ end
 --Deprecated
 function CustomHUD_Squad:DeprecatedInit()
 	if self.squadTextVisibility then
-		self.script.AddValueMonitor("monitorSquadText", "updateSquadText")
-		self:updateSquadText()
+		self.script.AddValueMonitor("monitorSquadText", "deprecatedUpdateSquadText")
+		self:deprecatedUpdateSquadText()
 	else
 		self.squadText.gameObject.SetActive(false)
 	end
@@ -43,7 +43,7 @@ function CustomHUD_Squad:monitorSquadText()
 	return self.squadText.text
 end
 --Deprecated
-function CustomHUD_Squad:updateSquadText()
+function CustomHUD_Squad:deprecatedUpdateSquadText()
 	self.targets.squadText.text = self.squadText.text
 end
 
