@@ -125,6 +125,8 @@ function CustomHUD_GameFeed:PushMessage(message)
 end
 
 function CustomHUD_GameFeed:onActorDiedInfo(actor, info, isSilent)
+	if isSilent then return end
+
 	local source = info.sourceActor
 	local actorName = actor.name
 	if actor.isPlayer then

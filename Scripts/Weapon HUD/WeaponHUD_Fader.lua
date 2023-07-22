@@ -2,7 +2,7 @@
 behaviour("WeaponHUD_Fader")
 
 function WeaponHUD_Fader:Awake()
-	self.sightText = GameObject.Find("Sight Text").GetComponent(Text)
+	--self.sightText = GameObject.Find("Sight Text").GetComponent(Text)
 end
 
 function WeaponHUD_Fader:Start()
@@ -16,7 +16,7 @@ function WeaponHUD_Fader:Start()
 	self.script.AddValueMonitor("monitorSpareAmmo", "ResetFade")
 	self.script.AddValueMonitor("monitorHeat", "ResetFade")
 	self.script.AddValueMonitor("monitorFireMode", "ResetFade")
-	self.script.AddValueMonitor("monitorSightModeText", "ResetFade")
+	--self.script.AddValueMonitor("monitorSightModeText", "ResetFade")
 	self.script.AddValueMonitor("monitorReloading", "ResetFade")
 
 	self.dataContainer = self.gameObject.GetComponent(DataContainer)
@@ -84,9 +84,9 @@ function WeaponHUD_Fader:monitorFireMode()
 	return Player.actor.activeWeapon.activeSubWeapon.isAuto
 end
 
-function CustomHUD_Weapon:monitorSightModeText()
+--[[function CustomHUD_Weapon:monitorSightModeText()
 	return self.sightText.text
-end
+end]]--
 
 function WeaponHUD_Fader:ResetFade()
 	self.targets.canvasGroup.alpha = 1

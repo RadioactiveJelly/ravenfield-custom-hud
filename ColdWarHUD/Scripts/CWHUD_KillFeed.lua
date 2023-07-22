@@ -113,6 +113,7 @@ end
 
 function CWHUD_KillFeed:onActorDied(actor, info, silentKill)
 	if actor.isPlayer then return end
+	if info.sourceActor == nil then return end
 	if not info.sourceActor.isPlayer then return end
 
 	local actorName = actor.name
@@ -140,6 +141,7 @@ function CWHUD_KillFeed:onActorDied(actor, info, silentKill)
 end
 
 function CWHUD_KillFeed:onVehicleDisabled(vehicle, damageInfo)
+	if damageInfo.sourceActor == nil then return end
 	if not damageInfo.sourceActor.isPlayer then return end
 
 	local vehicleName = vehicle.name
@@ -160,6 +162,7 @@ function CWHUD_KillFeed:onVehicleDisabled(vehicle, damageInfo)
 end
 
 function CWHUD_KillFeed:onVehicleDestroyed(vehicle, damageInfo)
+	if damageInfo.sourceActor == nil then return end
 	if not damageInfo.sourceActor.isPlayer then return end
 
 	local vehicleName = vehicle.name
