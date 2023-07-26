@@ -4556,10 +4556,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4285770678006500190}
-  - component: {fileID: 5452247613331519982}
   - component: {fileID: 4621926873121840358}
+  - component: {fileID: 5452247613331519982}
+  - component: {fileID: 3056454200448041420}
   m_Layer: 0
-  m_Name: _hitmarker
+  m_Name: hitmarkerLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4579,27 +4580,6 @@ Transform:
   m_Father: {fileID: 2269414348786507899}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5452247613331519982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5539598821547994089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 2213920135882650261, guid: ea291a957068a5149ac8b683d5315b0f, type: 3}
-  behaviour: 
-  targets:
-  - name: AudioSource
-    value: {fileID: 4621926873121840358}
-  - name: CanvasGroup
-    value: {fileID: 560235012839783978}
-  - name: HitmarkerSprite
-    value: {fileID: 1427057210136731198}
 --- !u!82 &4621926873121840358
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4696,6 +4676,145 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5452247613331519982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539598821547994089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8ca71ca01d2fb4098cb42abc5eceb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 2213920135882650261, guid: 7834527e827391342a40f6e9914f59d1, type: 3}
+  behaviour: 
+  targets:
+  - name: AudioSource
+    value: {fileID: 4621926873121840358}
+  - name: CanvasGroup
+    value: {fileID: 560235012839783978}
+  - name: HitmarkerSprite
+    value: {fileID: 1427057210136731198}
+  - name: DataContainer
+    value: {fileID: 3056454200448041420}
+--- !u!114 &3056454200448041420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539598821547994089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53a71c6a7b01e1449208c55b04f1aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bools: []
+  ints: []
+  floats: []
+  strings: []
+  vectors: []
+  rotations: []
+  colors: []
+  gradients: []
+  textures: []
+  sprites: []
+  audioClips: []
+  materials: []
+  animationCurves:
+  - id: AnimationCurve
+    value:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 28.82778
+        outSlope: 28.82778
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.027190626
+        value: 0.78384537
+        inSlope: 19.93797
+        outSlope: 19.93797
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.08874376
+        value: 1.4638941
+        inSlope: 4.0924807
+        outSlope: 4.0924807
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.25076342
+        value: 1
+        inSlope: -1.4315983
+        outSlope: -1.4315983
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.30292296
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.35177478
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.58106095
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6996229
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  gameObjects: []
+  skins: []
+  weaponEntries: []
 --- !u!1 &5583034990860308591
 GameObject:
   m_ObjectHideFlags: 0
