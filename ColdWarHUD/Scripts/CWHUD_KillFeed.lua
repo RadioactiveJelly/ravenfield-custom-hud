@@ -35,7 +35,6 @@ function CWHUD_KillFeed:Start()
 	else
 		PlayerHud.HideUIElement(UIElement.KillFeed)
 	end
-	
 end
 
 function CWHUD_KillFeed:DelayedStart()
@@ -45,6 +44,10 @@ function CWHUD_KillFeed:DelayedStart()
 		if scoreSystemObj then
 			self.scoreSystem = scoreSystemObj.GetComponent(ScriptedBehaviour)
 			self.scoreSystem.self:DisableDefaultHUD()
+			local function assist(actor)
+				self:OnAssist(actor)
+			end
+			self.scoreSystem.self:SubscribeToAssistEvent(self, assist)
 			self.enabled = true
 		end
 	end
@@ -179,5 +182,24 @@ function CWHUD_KillFeed:onVehicleDestroyed(vehicle, damageInfo)
 	message.self:SetText(messageText)
 
 	self.targets.audioSource.PlayOneShot(self.killSFX)
+	self:Push(message)
+end
+
+function CWHUD_KillFeed:OnAssist(actor)
+	local actorName = actor.name
+	local messageText = ""
+	if actor.team == Team.Blue then
+		actorName = "<color=" .. self.blueTeamHexCode .. ">" .. actorName .. "</color>"
+	else
+		actorName = "<color=" .. self.redTeamHexCode .. ">" .. actorName .. "</color>"
+	end
+	
+	messageText = "+" .. (self.scoreSystem.self.pointsPerAssist * self.scoreSystem.self.scoreMultiplier) .. " Assist " .. actorName
+
+	local message = self:RequestMessage()
+	message.self:SetText(messageText)
+
+	self.targets.audioSource.PlayOneShot(self.killSFX)
+	
 	self:Push(message)
 end

@@ -16,11 +16,24 @@ function CWHUD_Hitmarker:Start()
 end
 
 function CWHUD_Hitmarker:OnPlayerDealtDamage(damageInfo, hitInfo)
-	if damageInfo.isSplashDamage then return end
 
 	if hitInfo.actor then
+		if hitInfo.actor.isPlayer then return end
+
 		local willKill = (hitInfo.actor.health - damageInfo.healthDamage) <= 0
-		self:DisplayHitMarker(willKill)
+		local color = Color.white
+		if damageInfo.isSplashDamage then
+			color = Color.yellow
+		end
+		if willKill then
+			if damageInfo.isSplashDamage then
+				color = Color(1,0.5,0,1)
+			else
+				color = Color.red
+			end
+		end
+
+		self:DisplayHitMarker(color)
 		self:PlayActorDamageSound()
 	end
 end
@@ -33,7 +46,7 @@ function CWHUD_Hitmarker:Update()
 	end
 
 	if self.scaleTime > 0 then
-		self.scaleTime = self.scaleTime - Time.deltaTime
+		self.scaleTime = self.scaleTime - (Time.deltaTime * 2)
 		local scale = self.animationCurve.Evaluate(1 - self.scaleTime)
 		self.targets.HitmarkerSprite.transform.localScale = Vector3(scale,scale,1)
 	end
@@ -45,12 +58,8 @@ function CWHUD_Hitmarker:PlayActorDamageSound()
 	self.targets.AudioSource.Play()
 end
 
-function CWHUD_Hitmarker:DisplayHitMarker(willKill)
-	if willKill then
-		self.targets.HitmarkerSprite.color = Color.red
-	else
-		self.targets.HitmarkerSprite.color = Color.white
-	end
+function CWHUD_Hitmarker:DisplayHitMarker(color)
+	self.targets.HitmarkerSprite.color = color
 	self.hitMarkerAlpha = 1.5
 	self.targets.CanvasGroup.alpha = self.hitMarkerAlpha
 	self.scaleTime = 1
