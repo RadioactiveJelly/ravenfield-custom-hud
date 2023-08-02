@@ -371,6 +371,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -1100,6 +1101,7 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 74b86535cdba5c347871c19ec857ea60, type: 3}
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects:
   - id: MedalPrefab
     value: {fileID: 8628558421386981703, guid: 76ad3a4028d99a44dbfc546c1524695e, type: 3}
@@ -1270,6 +1272,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -2219,6 +2222,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -2788,6 +2792,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -2889,6 +2894,7 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: e1e5aadaac8a5a4488233803ae7c2017, type: 3}
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -3581,6 +3587,7 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 788653b05106dec429f27fa0d466ef5d, type: 3}
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects:
   - id: KillMessage
     value: {fileID: 1470682809572228743, guid: f13025de1177ef54b89a363f058ab177, type: 3}
@@ -4568,6 +4575,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -4990,6 +4998,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -5141,6 +5150,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -5210,6 +5220,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []
@@ -5651,7 +5662,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 34cdfa126bc9bb7459b3d4b7b9839ee8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6664,6 +6675,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects:
   - id: Indicator
     value: {fileID: 3962356695834280744, guid: 331a686e749fe6c46aab74c021474ff6, type: 3}
@@ -6909,6 +6921,7 @@ MonoBehaviour:
   audioClips: []
   materials: []
   animationCurves: []
+  fonts: []
   gameObjects: []
   skins: []
   weaponEntries: []

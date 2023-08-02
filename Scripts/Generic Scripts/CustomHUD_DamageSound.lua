@@ -9,9 +9,9 @@ function CustomHUD_DamageSound:Awake()
 end
 
 function CustomHUD_DamageSound:Update()
-	if Input.GetKeyDown(KeyCode.T) then
+	--[[if Input.GetKeyDown(KeyCode.T) then
 		self:PlaySound()
-	end
+	end]]--
 end
 
 function CustomHUD_DamageSound:onTakeDamage(actor, source, info)
@@ -24,5 +24,5 @@ end
 function CustomHUD_DamageSound:PlaySound()
 	local rand = Random.Range(0.9, 1.1)
 	self.targets.AudioSource.pitch = rand
-	self.targets.SoundBank.PlayRandom()
+	self.targets.AudioSource.Play()
 end

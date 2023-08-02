@@ -114,9 +114,9 @@ function CWHUD_HealthBar:onActorDied(actor,source,isSilent)
 end
 
 function CWHUD_HealthBar:Update()
-	 if(Input.GetKeyDown(KeyCode.T)) then
+	 --[[if(Input.GetKeyDown(KeyCode.T)) then
 		Player.actor.damage(Player.actor,10,0, false ,false)
-	 end
+	 end]]--
 
 	 local hpScale = Player.actor.health/self.maxHP
 
